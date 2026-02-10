@@ -1,0 +1,72 @@
+<!-- <link rel="stylesheet" href="recuperar-contrasena.css">
+
+<form class="login">
+  <div class="logo-mlb"></div>
+
+  <div class="grupo-registro">
+    <input type="text" id="Nombre" name="Nombre" placeholder="Nombre" required>
+  </div>
+
+  <div class="grupo-registro">
+    <input type="email" id="Correo" name="Correo" placeholder="Correo electrónico" required>
+  </div>
+
+  <button type="button" class="entrar">
+    Verificar datos
+  </button>
+
+  <p class="registro">
+    ¿Ya recordaste tu contraseña?
+    <a routerLink="/login" routerLinkActive="active">Inicia sesión</a>
+  </p>
+</form> -->
+
+<form class="login"
+      @formAnim
+      [@errorAnim]="errorState"
+      [@logoBreathing]="logoState">
+
+  <div class="logo-wrapper"
+       @logoAnim>
+    <div class="logo-mlb"></div>
+  </div>
+
+ <div class="inputs-wrapper">
+  <!-- NOMBRE -->
+  <div class="grupo-registro icon-input">
+    <span class="icon pelota"></span>
+    <input
+      type="text"
+      placeholder="Nombre"
+      (focus)="setFocus('nombre')"
+      (blur)="clearFocus()"
+      [@inputAnim]="inputFocus === 'nombre' ? 'active' : 'inactive'"
+    >
+  </div>
+
+  <!-- CORREO -->
+  <div class="grupo-registro icon-input">
+    <span class="icon bate"></span>
+    <input
+      type="email"
+      placeholder="Correo electrónico"
+      (focus)="setFocus('correo')"
+      (blur)="clearFocus()"
+      [@inputAnim]="inputFocus === 'correo' ? 'active' : 'inactive'"
+    >
+  </div>
+</div>
+
+  <button type="button"
+          class="entrar"
+          (click)="verificarDatos()">
+    Verificar datos
+  </button>
+
+  <p class="registro"
+     @fadeAnim>
+    ¿Ya recordaste tu contraseña?
+    <a routerLink="/login">Inicia sesión</a>
+  </p>
+
+</form>

@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="registro.css">
+
+<form class="login"
+      @formAnim
+      [@errorAnim]="registerState">
+
+  <div class="logo-wrapper"
+       @logoAnim
+       [@logoBreathing]="logoState">
+    <div class="logo-mlb"></div>
+  </div>
+
+  <!-- NOMBRE -->
+  <div class="grupo-registro icon-input">
+    <span class="icon pelota"></span>
+    <input
+      type="text"
+      placeholder="Nombre"
+      (focus)="setFocus('nombre')"
+      (blur)="clearFocus()"
+      [@inputAnim]="inputFocus === 'nombre' ? 'active' : 'inactive'"
+    >
+  </div>
+
+  <!-- APELLIDOS -->
+  <div class="grupo-registro icon-input">
+    <span class="icon bate"></span>
+    <input
+      type="text"
+      placeholder="Apellidos"
+      (focus)="setFocus('apellidos')"
+      (blur)="clearFocus()"
+      [@inputAnim]="inputFocus === 'apellidos' ? 'active' : 'inactive'"
+    >
+  </div>
+
+  
+
+  <!-- CORREO -->
+  <div class="grupo-registro icon-input">
+    <span class="icon pelota"></span>
+    <input
+      type="email"
+      placeholder="Correo electrónico"
+      (focus)="setFocus('email')"
+      (blur)="clearFocus()"
+      [@inputAnim]="inputFocus === 'email' ? 'active' : 'inactive'"
+    >
+  </div>
+
+  <!-- CONTRASEÑA -->
+  <div class="grupo-registro icon-input">
+    <span class="icon bate"></span>
+    <input
+      type="password"
+      placeholder="Contraseña"
+      (focus)="setFocus('password')"
+      (blur)="clearFocus()"
+      [@inputAnim]="inputFocus === 'password' ? 'active' : 'inactive'"
+    >
+  </div>
+
+  <!-- CONFIRMAR CONTRASEÑA -->
+  <div class="grupo-registro icon-input">
+    <span class="icon pelota"></span>
+    <input
+      type="password"
+      placeholder="Confirmar contraseña"
+      (focus)="setFocus('confirmPassword')"
+      (blur)="clearFocus()"
+      [@inputAnim]="inputFocus === 'confirmPassword' ? 'active' : 'inactive'"
+    >
+  </div>
+
+  <button type="button"
+          class="entrar"
+          (click)="register()"
+          @buttonAnim>
+    Registrarse
+  </button>
+
+  <p class="registro">
+    ¿Ya tienes cuenta?
+    <a routerLink="/login">Inicia sesión</a>
+  </p>
+
+</form>

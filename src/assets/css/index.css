@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+  min-height: 100vh;
+  background: #061f3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login {
+  background: #ffffff;
+  width: 100%;
+  max-width: 380px;
+  padding: 32px 28px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.logo-mlb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-mlb .logo {
+  width: 250px;
+  height: auto;
+}
+
+.grupo-registro {
+  margin-bottom: 16px;
+}
+
+.grupo-registro input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cfd6e0;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.grupo-registro input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.15);
+}
+
+.recuperar-contrasena {
+  display: block;
+  margin: 8px 0 20px;
+  font-size: 13px;
+  color: #0056b3;
+  text-decoration: none;
+  text-align: center;
+}
+
+.recuperar-contrasena:hover {
+  text-decoration: underline;
+}
+
+.entrar {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  background: #000000;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.entrar:hover {
+  background: #1a1a1a;
+}
+
+.entrar:active {
+  transform: scale(0.98);
+}
+
+.registro {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #333333;
+}
+
+.registro a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.registro a:hover {
+  text-decoration: underline;
+}

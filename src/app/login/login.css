@@ -1,0 +1,137 @@
+
+.login {
+  background: #ffffff;
+  width: 100%;
+  max-width: 450px;
+  padding: 32px 28px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.logo-wrapper {
+  width: 300px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.logo-mlb {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../assets/img/mlbresultadosimg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+
+.grupo-registro {
+  margin-bottom: 20px;
+}
+
+.grupo-registro input {
+  width: 100%;
+  padding: 20px 14px;
+  border: 1px solid #cfd6e0;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+}
+
+
+.recuperar-contrasena {
+  display: block;
+  margin: 25px 0 25px;
+  font-size: 13px;
+  color: #0056b3;
+  text-decoration: none;
+  text-align: center;
+}
+
+.recuperar-contrasena:hover {
+  text-decoration: underline;
+}
+
+.entrar {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  background: #000000;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.entrar:hover {
+  background: #1a1a1a;
+}
+
+.entrar:active {
+  transform: scale(0.98);
+}
+
+.registro {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #333333;
+}
+
+.registro a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.registro a:hover {
+  text-decoration: underline;
+}
+
+/* Contenedor input + icono */
+.icon-input {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 2;
+
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Pelota */
+.icon.pelota {
+  background-image: url("../../assets/img/PelotaBeisbol.png");
+}
+
+/* Bate */
+.icon.bate {
+  background-image: url("../../assets/img/bateBeisbol.png");
+}
+
+
+/* Espacio para el icono */
+.icon-input input {
+  padding-left: 48px;
+  position: relative;
+  z-index: 1; 
+}
+
+.icon-input:focus-within .icon {
+  transform: translateY(-50%) scale(1.2) rotate(-8deg);
+  opacity: 1;
+}
+

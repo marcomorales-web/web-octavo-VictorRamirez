@@ -1,0 +1,129 @@
+<!-- 
+<link rel="stylesheet" href="login.css">
+
+<form class="login">
+  <div class="logo-mlb">
+</div>
+  <div class="grupo-registro">
+    <input type="email" id="Correo" name="Correo" placeholder="Correo electronico" required>
+  </div>
+
+  <div class="grupo-registro">
+    <input type="password" id="Contrasena" name="Contrasena" placeholder="Contrasena">
+  </div>
+
+  <p class="recuperar-contrasena">
+      <a routerLink = "/recuperar-contrasena" routerLinkActive = "active">Olvide Contraseña</a>
+  </p>
+  
+
+  <button type="button" class="entrar">Entrar</button>
+
+  <p class="registro">
+    ¿No tienes cuenta? <a routerLink = "/registro" routerLinkActive = "active">Registrate aqui</a>
+  </p>
+</form> -->
+
+
+<!-- <form class="login"
+      @formAnim
+      [@errorAnim]="loginState">
+
+  <div class="logo-wrapper"
+     @logoAnim
+     [@logoBreathing]="logoState">
+
+  <div class="logo-mlb"></div>
+
+  </div>
+
+
+  <div class="grupo-registro">
+  <input
+    type="email"
+    placeholder="Correo electronico"
+    (focus)="setFocus('email')"
+    (blur)="clearFocus()"
+    [@inputAnim]="inputFocus === 'email' ? 'active' : 'inactive'"
+  >
+</div>
+
+<div class="grupo-registro">
+  <input
+    type="password"
+    placeholder="Contrasena"
+    (focus)="setFocus('password')"
+    (blur)="clearFocus()"
+    [@inputAnim]="inputFocus === 'password' ? 'active' : 'inactive'"
+  >
+</div>
+
+
+  <p class="recuperar-contrasena">
+    <a routerLink="/recuperar-contrasena">Olvide Contraseña</a>
+  </p>
+
+  <button type="button"
+          class="entrar"
+          (click)="login()"
+          @buttonAnim>
+    Entrar
+  </button>
+
+  <p class="registro">
+    ¿No tienes cuenta?
+    <a routerLink="/registro">Registrate aqui</a>
+  </p>
+</form> -->
+
+
+<form class="login"
+      @formAnim
+      [@errorAnim]="loginState">
+
+  <div class="logo-wrapper"
+       @logoAnim
+       [@logoBreathing]="logoState">
+    <div class="logo-mlb"></div>
+  </div>
+
+  <!-- CORREO -->
+  <div class="grupo-registro icon-input">
+    <span class="icon pelota"></span>
+    <input
+      type="email"
+      placeholder="Correo electrónico"
+      (focus)="setFocus('email')"
+      (blur)="clearFocus()"
+      [@inputAnim]="inputFocus === 'email' ? 'active' : 'inactive'"
+    >
+  </div>
+
+  <!-- CONTRASEÑA -->
+  <div class="grupo-registro icon-input">
+    <span class="icon bate"></span>
+    <input
+      type="password"
+      placeholder="Contraseña"
+      (focus)="setFocus('password')"
+      (blur)="clearFocus()"
+      [@inputAnim]="inputFocus === 'password' ? 'active' : 'inactive'"
+    >
+  </div>
+
+  <p class="recuperar-contrasena">
+    <a routerLink="/recuperar-contrasena">Olvide Contraseña</a>
+  </p>
+
+  <button type="button"
+          class="entrar"
+          (click)="login()"
+          @buttonAnim>
+    Entrar
+  </button>
+
+  <p class="registro">
+    ¿No tienes cuenta?
+    <a routerLink="/registro">Registrate aqui</a>
+  </p>
+</form>
