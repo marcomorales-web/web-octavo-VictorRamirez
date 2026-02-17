@@ -21,7 +21,7 @@
   </p>
 </form> -->
 
-<form class="login"
+<!-- <form class="login"
       @formAnim
       [@errorAnim]="errorState"
       [@logoBreathing]="logoState">
@@ -32,7 +32,6 @@
   </div>
 
  <div class="inputs-wrapper">
-  <!-- NOMBRE -->
   <div class="grupo-registro icon-input">
     <span class="icon pelota"></span>
     <input
@@ -44,7 +43,6 @@
     >
   </div>
 
-  <!-- CORREO -->
   <div class="grupo-registro icon-input">
     <span class="icon bate"></span>
     <input
@@ -69,4 +67,52 @@
     <a routerLink="/login">Inicia sesión</a>
   </p>
 
-</form>
+</form> -->
+
+<div class="pagina-recuperar">
+
+  <form class="login"
+        @formAnim
+        [@errorAnim]="errorState"
+        [@logoBreathing]="logoState">
+
+    <div class="logo-wrapper" @logoAnim>
+      <div class="logo-mlb"></div>
+    </div>
+
+    <div class="inputs-wrapper">
+      <div class="grupo-registro icon-input">
+        <span class="icon pelota"></span>
+        <input
+          type="text"
+          placeholder="Nombre"
+          (focus)="setFocus('nombre')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'nombre' ? 'active' : 'inactive'"
+        >
+      </div>
+
+      <div class="grupo-registro icon-input">
+        <span class="icon bate"></span>
+        <input
+          type="email"
+          placeholder="Correo electrónico"
+          (focus)="setFocus('correo')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'correo' ? 'active' : 'inactive'"
+        >
+      </div>
+    </div>
+
+    <button type="button" class="entrar" (click)="verificarDatos()">
+      Verificar datos
+    </button>
+
+    <p class="registro" @fadeAnim>
+      ¿Ya recordaste tu contraseña?
+      <a routerLink="/login">Inicia sesión</a>
+    </p>
+
+  </form>
+
+</div>

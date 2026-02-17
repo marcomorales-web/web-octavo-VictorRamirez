@@ -1,0 +1,67 @@
+.barra-superior {
+  width: 100%;
+  height: 90px;
+  background: linear-gradient(180deg, #0a2f6b, #041E42);
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.30);
+  border-bottom: 3px solid #c8102e; 
+}
+
+.contenido-barra {
+  width: 100%;
+  padding-left: 30px; 
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 160px;
+  height: 70px;
+
+  background-image: url("../../assets/img/mlbEspanol2.jpg");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+}
+
+.contenido-barra {
+  width: 100%;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  margin-left: 50px;
+  display: flex;
+  gap: 30px;
+}
+
+.menu a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.menu a:hover {
+  opacity: 0.75;
+  transform: translateY(-1px);
+}
+
+.perfil {
+  margin-left: auto; 
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.perfil:hover {
+  background: rgba(255,255,255,0.12);
+}

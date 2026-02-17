@@ -1,4 +1,19 @@
 
+.pagina-login {
+  min-height: 100vh;
+  width: 100%;
+
+  background-image: url("../../assets/img/EstadioDiablos2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 .login {
   background: #ffffff;
   width: 100%;
@@ -8,6 +23,8 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   text-align: center;
 }
+
+
 
 .logo-wrapper {
   width: 300px;
@@ -89,7 +106,6 @@
   text-decoration: underline;
 }
 
-/* Contenedor input + icono */
 .icon-input {
   position: relative;
 }
@@ -112,18 +128,16 @@
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Pelota */
+
 .icon.pelota {
   background-image: url("../../assets/img/PelotaBeisbol.png");
 }
 
-/* Bate */
 .icon.bate {
   background-image: url("../../assets/img/bateBeisbol.png");
 }
 
 
-/* Espacio para el icono */
 .icon-input input {
   padding-left: 48px;
   position: relative;
