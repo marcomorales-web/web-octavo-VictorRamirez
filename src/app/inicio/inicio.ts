@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-inicio',
-  imports: [],
+  standalone: true,
+  imports: [JsonPipe],
   templateUrl: './inicio.html',
-  styleUrl: './inicio.css',
+  styleUrls: ['./inicio.css']
 })
 export class Inicio {
 
