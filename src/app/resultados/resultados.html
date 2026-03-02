@@ -20,3 +20,81 @@
   </div>
 
 </header>
+
+
+<!-- <label for="fecha">Selecciona una fecha:</label>
+<input 
+  type="date"
+  id="fecha"
+  name="fecha"
+  #fechaInput
+  (change)="cargarJuegos(fechaInput.value)"> -->
+
+<!-- <mat-form-field appearance="fill">
+  <mat-label>Selecciona una fecha</mat-label>
+  <input
+    matInput
+    [matDatepicker]="calendario"
+    [(ngModel)]="fechaSeleccionada"
+    (dateChange)="cargarJuegos()"
+  >
+  <mat-datepicker-toggle matIconSuffix [for]="calendario"></mat-datepicker-toggle>
+  <mat-datepicker #calendario></mat-datepicker>
+</mat-form-field>
+
+<div *ngFor="let juego of juegos">
+
+  <h3>
+    {{ juego?.teams?.away?.team?.name }} {{ juego?.teams?.away?.score }}
+    vs
+    {{ juego?.teams?.home?.team?.name }} {{ juego?.teams?.home?.score }}
+  </h3>
+
+</div> -->
+<section class="contenedor-principal">
+
+  <h1 class="titulo-principal">Resultados MLB</h1>
+
+  <div class="contenedor-calendario">
+    <mat-form-field appearance="fill">
+      <mat-label>Selecciona una fecha</mat-label>
+      <input
+        matInput
+        [matDatepicker]="calendario"
+        [(ngModel)]="fechaSeleccionada"
+        (dateInput)="cargarJuegos($event.value)"
+      >
+      <mat-datepicker-toggle matIconSuffix [for]="calendario"></mat-datepicker-toggle>
+      <mat-datepicker #calendario></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="grid-juegos">
+  <div class="card-juego-cuadrada" *ngFor="let juego of juegos">
+
+    <div class="estado">
+      {{ juego?.status?.detailedState }}
+    </div>
+
+    <div class="equipos-cuadrado">
+
+      <div class="fila-equipo">
+        <span>{{ juego?.teams?.away?.team?.name }}</span>
+        <span class="score">
+          {{ juego?.teams?.away?.score }}
+        </span>
+      </div>
+
+      <div class="fila-equipo">
+        <span>{{ juego?.teams?.home?.team?.name }}</span>
+        <span class="score">
+          {{ juego?.teams?.home?.score }}
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</section>

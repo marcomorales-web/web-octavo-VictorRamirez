@@ -65,3 +65,137 @@
 .perfil:hover {
   background: rgba(255,255,255,0.12);
 }
+
+/* CONTENEDOR GENERAL */
+.contenedor-principal {
+  padding: 40px 80px;
+}
+
+/* TITULO */
+.titulo-principal {
+  text-align: center;
+  font-size: 42px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: #041E42;
+}
+
+/* CALENDARIO CENTRADO */
+.contenedor-calendario {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+/* LISTA DE JUEGOS */
+.lista-juegos {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* CARD DEL JUEGO */
+.card-juego {
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-juego:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.equipos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.equipo {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.nombre {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.score {
+  font-size: 28px;
+  font-weight: bold;
+  color: #c8102e;
+}
+
+.vs {
+  font-size: 18px;
+  font-weight: 600;
+  color: #666;
+}
+
+/* INFO EXTRA */
+.info-extra {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+}
+
+/* GRID DE JUEGOS */
+.grid-juegos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* CARD CUADRADA */
+.card-juego-cuadrada {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 170px;
+}
+
+.card-juego-cuadrada:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* ESTADO DEL JUEGO */
+.estado {
+  font-size: 13px;
+  font-weight: 600;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+/* EQUIPOS */
+.equipos-cuadrado {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* FILA DE EQUIPO */
+.fila-equipo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.score {
+  font-size: 20px;
+  font-weight: bold;
+  color: #c8102e;
+}

@@ -1,46 +1,139 @@
-import { Component, OnInit } from '@angular/core';
-import { JsonPipe } from '@angular/common';
+// //es una interfaz que permite usar el ciclo de vida ngOnInit()
+// import { Component, OnInit } from '@angular/core';
+// import { MlbService } from '../services/mlb';
+// import { CommonModule } from '@angular/common';
+// import { MatDatepickerModule } from '@angular/material/datepicker';
+// import { MatFormFieldModule } from '@angular/material/form-field';
+// import { MatInputModule } from '@angular/material/input';
+// import { MatNativeDateModule } from '@angular/material/core';
+// import { FormsModule } from '@angular/forms';
+// import { ChangeDetectorRef } from '@angular/core';
+
+// @Component({
+//   selector: 'app-resultados',
+//   standalone: true,
+//   imports: [
+//     CommonModule,
+//     FormsModule,
+//     MatDatepickerModule,
+//     MatFormFieldModule,
+//     MatInputModule,
+//     MatNativeDateModule
+//   ],
+//   templateUrl: './resultados.html',
+//   styleUrls: ['./resultados.css']
+// })
+
+
+// export class Resultados implements OnInit {
+
+//   juegos: any;
+//   fechaSeleccionada!: Date;
+
+//   constructor(private mlbService: MlbService) {}
+
+//   ngOnInit(): void {
+//     this.fechaSeleccionada = new Date();
+//     this.cargarJuegos();
+//   }
+
+//   cargarJuegos(fecha?: Date): void {
+
+//   if (fecha) {
+//     this.fechaSeleccionada = fecha;
+//   }
+
+//   if (!this.fechaSeleccionada) return;
+
+//   const fechaFormateada = this.fechaSeleccionada
+//     .toISOString()
+//     .split('T')[0];
+
+//   this.mlbService.obtenerJuegosPorFecha(fechaFormateada)
+//     .subscribe({
+//       next: (data: any) => {
+//         const fechas = data?.dates;
+
+//         if (fechas && fechas.length > 0) {
+//           this.juegos = fechas[0].games;
+//         } else {
+//           this.juegos = [];
+//         }
+//       },
+//       error: (err) =>
+//         console.error('Error al traer resultados:', err)
+//     });
+// }
+// }
+
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MlbService } from '../services/mlb';
+import { CommonModule } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-resultados',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule
+  ],
   templateUrl: './resultados.html',
-  styleUrls: ['./resultados.css'] 
+  styleUrls: ['./resultados.css']
 })
 export class Resultados implements OnInit {
-  juegos: any;
 
-  constructor(private mlbService: MlbService) {}
+  juegos: any[] = [];  
+  fechaSeleccionada!: Date;
+
+  constructor(
+    private mlbService: MlbService,
+    private cd: ChangeDetectorRef 
+  ) {}
 
   ngOnInit(): void {
-  const fechaPrueba = '2026-02-20';
+    this.fechaSeleccionada = new Date();
+    this.cargarJuegos(this.fechaSeleccionada);
+  }
 
-  this.mlbService.obtenerJuegosPorFecha(fechaPrueba).subscribe({
-    next: (data: any) => {
+  cargarJuegos(fecha?: Date): void {
 
-      console.log('Respuesta completa:', data);
+    if (fecha) {
+      this.fechaSeleccionada = fecha;
+    }
 
-      const fechas = data?.dates;
+    if (!this.fechaSeleccionada) return;
 
-      if (fechas && fechas.length > 0) {
+    const annos = this.fechaSeleccionada.getFullYear();
+    const mes = String(this.fechaSeleccionada.getMonth() + 1).padStart(2, '0');
+    const dia = String(this.fechaSeleccionada.getDate()).padStart(2, '0');
 
-        const juegos = fechas[0].games;
+    const fechaFormateada = `${annos}-${mes}-${dia}`;
 
-        juegos.forEach((juego: any) => {
-          const visitante = juego.teams.away.team.name;
-          const local = juego.teams.home.team.name;
+    this.mlbService.obtenerJuegosPorFecha(fechaFormateada)
+      .subscribe({
+        next: (data: any) => {
 
-          console.log(`${visitante} vs ${local}`);
-        });
+          const fechas = data?.dates;
 
-      } else {
-        console.log('No hay juegos en esa fecha');
-      }
-    },
-    error: (err) => console.error('Error al traer resultados:', err)
-  });
-}
+          if (fechas && fechas.length > 0) {
+            this.juegos = [...fechas[0].games]; 
+          } else {
+            this.juegos = [];
+          }
 
+          this.cd.detectChanges();
+        },
+        error: (err) =>
+          console.error('Error al traer resultados:', err)
+      });
+  }
 }
