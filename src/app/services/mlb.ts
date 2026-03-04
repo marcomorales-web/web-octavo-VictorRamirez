@@ -20,22 +20,16 @@ import { Injectable } from '@angular/core';
 
 export class MlbService {
   private baseUrl = 'https://statsapi.mlb.com/api/v1';
+  private baseUrlV11 = 'https://statsapi.mlb.com/api/v1.1';
 
-  /**
-   * Importas HttpClient para poder usar su tipo.
-  Luego en el constructor le dices a Angular que necesitas una instancia.
-  Angular automáticamente la crea (si no existe) y la inyecta en tu servicio.
-  Gracias a eso puedes usar this.http.get() dentro de tu código.
-   * 
-   */
   constructor(private http: HttpClient) {}
 
 
   obtenerJuegosPorFecha(fecha: string) {
     return this.http.get(`${this.baseUrl}/schedule?sportId=1&date=${fecha}`); // Devuelve un observable
-  }
-  /**En Angular, el Observable no envuelve el JSON directamente.
-  Envuelve la operación HTTP y cuando la respuesta llega, emite el objeto convertido desde JSON. 
-   */
-}
+  };
 
+  obtenerDetalleJuego(gamePk: number) {
+    return this.http.get(`${this.baseUrlV11}/game/${gamePk}/feed/live`);
+  }
+}

@@ -74,6 +74,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-resultados',
@@ -84,7 +85,8 @@ import { FormsModule } from '@angular/forms';
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    RouterLink
   ],
   templateUrl: './resultados.html',
   styleUrls: ['./resultados.css']
@@ -126,6 +128,12 @@ export class Resultados implements OnInit {
 
           if (fechas && fechas.length > 0) {
             this.juegos = [...fechas[0].games]; 
+
+            this.juegos.forEach(juego => {
+            if (juego.status.abstractGameState === 'Live') {
+              this.verEntrada(juego);
+            }
+          });
           } else {
             this.juegos = [];
           }
@@ -136,4 +144,23 @@ export class Resultados implements OnInit {
           console.error('Error al traer resultados:', err)
       });
   }
+
+  verEntrada(juego: any): void {
+
+  if (juego.status.abstractGameState !== 'Live') return;
+
+  this.mlbService.obtenerDetalleJuego(juego.gamePk)
+    .subscribe((data: any) => {
+
+      const linescore = data?.liveData?.linescore;
+
+      if (linescore) {
+
+        juego.entradaActual =
+          linescore.inningHalf + " " + linescore.currentInning;
+
+        this.cd.detectChanges();
+      }
+    });
+}
 }
