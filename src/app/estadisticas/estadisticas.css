@@ -1,9 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Times New Roman', Times, serif;
-}
-
 .barra-superior {
   width: 100%;
   height: 90px;
@@ -70,60 +64,4 @@
 
 .perfil:hover {
   background: rgba(255,255,255,0.12);
-}
-
-.Carrusel{
-    width: 100%;
-    height: 87vh;
-    overflow: hidden;
-    position: relative;
-}
-
-.Carrusel ul{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    width: 500%;
-
-    animation: carrusel 15s infinite;
-}
-
-.Carrusel li {
-  width: 100%;
-  list-style: none;
-
-}
-
-.Carrusel img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.texto{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(0, 19, 228);
-    font-size: 40px;
-    font-weight: bold;
-    z-index: 2;
-    text-decoration: underline;
-}
-
-@keyframes carrusel{
-    0% { margin-left: 0; }
-    15% { margin-left: 0; }
-
-    20% { margin-left: -100%; }
-    35% { margin-left: -100%; }
-
-    40% { margin-left: -200%; }
-    55% { margin-left: -200%; }
-
-    60% { margin-left: -300%; }
-    75% { margin-left: -300%; }
-
-    80% { margin-left: -400%; }
-    100% { margin-left: -400%; }
 }
