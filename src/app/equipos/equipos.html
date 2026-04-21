@@ -23,14 +23,182 @@
 
 </header>
 
+<div class="background-estadio"
+     [style.background-image]="'url(' + fondoEstadio + ')'">
+</div>
+
+<div class="buscador">
+
+  <input 
+    type="text" 
+    placeholder="Buscar equipo..."
+    (input)="buscarEquipo($event)">
+
+</div>
+
+<div class="cards" *ngIf="equipos.length">
+
+  <ng-container *ngFor="let equipo of equipos; let i = index">
+
+    <input
+      type="radio"
+      [id]="'radio-' + (i+1)"
+      name="radio-card"
+      [checked]="i === 0"
+      (change)="cambiarFondo(equipo?.team?.displayName)">
+
+    <article
+      class="card"
+      [style.--angle]="(i % 2 === 0 ? 1 : -1) * (4 + (i % 5)) + 'deg'"
+      [style.transform]="'translateX(' + ((i % 5) * 6 - 12) + 'px)'">
+
+      <img
+        class="card-img"
+        [src]="equipo?.team?.logos?.[0]?.href">
+
+      <div class="card-data">
+
+        <span class="card-num" style="color: white;">{{i+1}}/30</span>
+
+        <h2 style="color: white;">{{equipo?.team?.displayName}}</h2>
+
+        <p>
+          {{ historiasEquipos[equipo?.team?.displayName] }}
+        </p>
+
+        <footer>
+
+          <label
+            [for]="'radio-' + (i === 0 ? equipos.length : i)"
+            aria-label="Previous">
+            &#10094;
+          </label>
+
+          <label
+            [for]="'radio-' + (i + 2 > equipos.length ? 1 : i + 2)"
+            aria-label="Next">
+            &#10095;
+          </label>
+
+        </footer>
+
+      </div>
+
+    </article>
+
+  </ng-container>
+
+</div>
+
+<!-- <footer class="footer">
+
+  <div class="footer-container">
+
+    <div class="footer-section">
+      <h3> Resultados de MLB Español</h3>
+      <p>Esta pagina web esta hecha para ver Resultados en vivo</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Enlaces</h4>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Resultados</a></li>
+        <li><a href="#">Estadísticas</a></li>
+        <li><a href="#">Posiciones</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contacto</h4>
+      <p>Email: victor.delacruz@itsvc.edu.mx</p>
+      <p>Tel: +52 746 1172063</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 MLB Español ITSVC - Todos los derechos reservados</p>
+  </div>
+
+</footer> -->
+
+<!-- <div class="buscador">
+
+<input 
+  type="text" 
+  placeholder="Buscar equipo..."
+  (input)="buscarEquipo($event)"
+  >
+
+</div>
+
+
+<div class="cards" *ngIf="equipos.length">
+
+  <ng-container *ngFor="let equipo of equipos; let i = index">
+
+    <input
+      type="radio"
+      [id]="'radio-' + (i+1)"
+      name="radio-card"
+      [checked]="i === 0">
+
+    <article
+      class="card"
+      [style.--angle]="(i % 2 === 0 ? 1 : -1) * (4 + (i % 5)) + 'deg'"
+      [style.transform]="'translateX(' + ((i % 5) * 6 - 12) + 'px)'">
+
+      <img
+        class="card-img"
+        [src]="equipo?.team?.logos?.[0]?.href">
+
+      <div class="card-data">
+
+        <span class="card-num">{{i+1}}/30</span>
+
+        <h2>{{equipo?.team?.displayName}}</h2>
+
+        <p>
+          {{ historiasEquipos[equipo?.team?.displayName] }}
+        </p>
+
+        <footer>
+
+          <label
+            [for]="'radio-' + (i === 0 ? equipos.length : i)"
+            aria-label="Previous">
+            &#10094;
+          </label>
+
+          <label
+            [for]="'radio-' + (i + 2 > equipos.length ? 1 : i + 2)"
+            aria-label="Next">
+            &#10095;
+          </label>
+
+        </footer>
+
+      </div>
+
+    </article>
+
+  </ng-container>
+
+</div> -->\
+
+
+
+
+<!-- 
 <div class="cards">
 
-  <input type="radio" id="radio-1" name="radio-card" checked>
+  <input type="radio" id="radio-1" name="radio-card" checked > 
   <article class="card" style="--angle:4deg">
-    <img class="card-img" src="../../assets/img/equipos/orioles.jpg">
+    <img class="card-img" [src]="equipos[0]?.team?.logos?.[0]?.href">
    <div class="card-data">
       <span class="card-num">1/30</span>
-      <h2>Orioles de Baltimore</h2>
+      <h2>{{equipos[0]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-7" aria-label="Previous">&#10094;</label>
@@ -41,10 +209,10 @@
 
   <input type="radio" id="radio-2" name="radio-card">
   <article class="card" style="--angle:-8deg">
-    <img class="card-img" src="../../assets/img/equipos/RedSox.jpg">
+    <img class="card-img" [src]="equipos[1]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">2/30</span>
-      <h2>Red Sox</h2>
+      <h2>{{equipos[1]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-1" aria-label="Previous">&#10094;</label>
@@ -55,10 +223,10 @@
 
   <input type="radio" id="radio-3" name="radio-card">
   <article class="card" style="--angle:-7deg">
-    <img class="card-img" src="../../assets/img/equipos/Yankees.png">
+    <img class="card-img" [src]="equipos[2]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">3/30</span>
-      <h2>Yankees</h2>
+      <h2>{{equipos[2]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-2" aria-label="Previous">&#10094;</label>
@@ -69,10 +237,10 @@
 
     <input type="radio" id="radio-4" name="radio-card">
   <article class="card" style="--angle:11deg">
-    <img class="card-img" src="../../assets/img/equipos/TampaBayRays.png">
+    <img class="card-img" [src]="equipos[3]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">4/30</span>
-      <h2>Tampa Bay Rays</h2>
+      <h2>{{equipos[3]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-3" aria-label="Previous">&#10094;</label>
@@ -83,10 +251,10 @@
 
     <input type="radio" id="radio-5" name="radio-card" >
   <article class="card" style="--angle:13deg">
-    <img class="card-img" src="../../assets/img/equipos/BlueJays.jpg">
+    <img class="card-img" [src]="equipos[4]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">5/30</span>
-      <h2>Blue Jays</h2>
+      <h2>{{equipos[4]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-4" aria-label="Previous">&#10094;</label>
@@ -97,10 +265,10 @@
 
     <input type="radio" id="radio-6" name="radio-card">
   <article class="card" style="--angle:-17deg">
-    <img class="card-img" src="../../assets/img/equipos/WhiteSox.jpg" >
+    <img class="card-img" [src]="equipos[5]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">6/30</span>
-      <h2>White Sox</h2>
+      <h2>{{equipos[5]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-5" aria-label="Previous">&#10094;</label>
@@ -111,10 +279,10 @@
 
   <input type="radio" id="radio-7" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/ClevelandGuardians.jpg" >
+    <img class="card-img" [src]="equipos[6]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">7/30</span>
-      <h2>Cleveland Guardians</h2>
+      <h2>{{equipos[6]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-6" aria-label="Previous">&#10094;</label>
@@ -125,10 +293,10 @@
 
   <input type="radio" id="radio-8" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/DetroitTigers.png" >
+    <img class="card-img" [src]="equipos[7]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">8/30</span>
-      <h2>Detroit Tigers</h2>
+      <h2>{{equipos[7]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-7" aria-label="Previous">&#10094;</label>
@@ -139,10 +307,10 @@
 
   <input type="radio" id="radio-9" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/KansasCityRoyals.jpg" >
+    <img class="card-img" [src]="equipos[8]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">9/30</span>
-      <h2>Kansas City Royals</h2>
+      <h2>{{equipos[8]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-8" aria-label="Previous">&#10094;</label>
@@ -153,10 +321,10 @@
 
   <input type="radio" id="radio-10" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/MinnesotaTwins.png" >
+    <img class="card-img" [src]="equipos[9]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">10/30</span>
-      <h2>Minnesota Twins</h2>
+      <h2>{{equipos[9]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-9" aria-label="Previous">&#10094;</label>
@@ -167,10 +335,10 @@
 
   <input type="radio" id="radio-11" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/AthleticsOakland.jpg" >
+    <img class="card-img" [src]="equipos[10]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">11/30</span>
-      <h2>ATHLETICS OAKLAND</h2>
+      <h2>{{equipos[10]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-10" aria-label="Previous">&#10094;</label>
@@ -181,10 +349,10 @@
 
   <input type="radio" id="radio-12" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/HoustonAstros.png" >
+    <img class="card-img" [src]="equipos[11]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">12/30</span>
-      <h2>HOUSTON ASTROS</h2>
+      <h2>{{equipos[11]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-11" aria-label="Previous">&#10094;</label>
@@ -195,10 +363,10 @@
 
   <input type="radio" id="radio-13" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/Angels.jpg" >
+    <img class="card-img" [src]="equipos[12]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">13/30</span>
-      <h2>ANAHEIM ANGELS</h2>
+      <h2>{{equipos[12]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-12" aria-label="Previous">&#10094;</label>
@@ -209,10 +377,10 @@
 
   <input type="radio" id="radio-14" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/SeattleMariners.jpg" >
+    <img class="card-img" [src]="equipos[13]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">14/30</span>
-      <h2>SEATTLE MARINERS</h2>
+      <h2>{{equipos[13]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-13" aria-label="Previous">&#10094;</label>
@@ -223,10 +391,10 @@
 
   <input type="radio" id="radio-15" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/TexasRangers.png" >
+    <img class="card-img" [src]="equipos[14]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">15/30</span>
-      <h2>TEXAS RANGERS</h2>
+      <h2>{{equipos[14]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-14" aria-label="Previous">&#10094;</label>
@@ -237,10 +405,10 @@
 
   <input type="radio" id="radio-16" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/Braves.png" >
+    <img class="card-img" [src]="equipos[15]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">16/30</span>
-      <h2>ATLANTA BRAVES</h2>
+      <h2>{{equipos[15]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-15" aria-label="Previous">&#10094;</label>
@@ -251,10 +419,10 @@
 
   <input type="radio" id="radio-17" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/MiamiMarlins.png" >
+    <img class="card-img" [src]="equipos[16]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">17/30</span>
-      <h2>MIAMI MARLINS</h2>
+      <h2>{{equipos[16]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-16" aria-label="Previous">&#10094;</label>
@@ -265,10 +433,10 @@
 
   <input type="radio" id="radio-18" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/Mets.png" >
+    <img class="card-img" [src]="equipos[17]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">18/30</span>
-      <h2>NEW YORK METS</h2>
+      <h2>{{equipos[17]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-17" aria-label="Previous">&#10094;</label>
@@ -279,10 +447,10 @@
 
   <input type="radio" id="radio-19" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/PhiladelphiaPhillies.png" >
+    <img class="card-img" [src]="equipos[18]?.team?.logos?.[0]?.href">
     <div class="card-data">
       <span class="card-num">19/30</span>
-      <h2>PHILADELPHIA PHILLIES</h2>
+      <h2>{{equipos[18]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-18" aria-label="Previous">&#10094;</label>
@@ -293,10 +461,10 @@
 
   <input type="radio" id="radio-20" name="radio-card" >
   <article class="card" style="--angle:20deg">
-    <img class="card-img" src="../../assets/img/equipos/WashingtonNationals.jpg" >
+    <img class="card-img" [src]="equipos[19]?.team?.logos?.[1]?.href">
     <div class="card-data">
       <span class="card-num">20/30</span>
-      <h2>WASHINGTON NATIONALS</h2>
+      <h2>{{equipos[19]?.team?.displayName}}</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
       <footer>
         <label for="radio-19" aria-label="Previous">&#10094;</label>
@@ -304,4 +472,144 @@
       </footer>
       </div>
   </article>
-</div>
+
+  <input type="radio" id="radio-21" name="radio-card" >
+  <article class="card" style="--angle:20deg">
+    <img class="card-img" [src]="equipos[20]?.team?.logos?.[0]?.href">
+    <div class="card-data">
+      <span class="card-num">21/30</span>
+      <h2>{{equipos[20]?.team?.displayName}}</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <footer>
+        <label for="radio-20" aria-label="Previous">&#10094;</label>
+        <label for="radio-22" aria-label="Next">&#10095;</label>
+      </footer>
+      </div>
+  </article>
+
+  <input type="radio" id="radio-22" name="radio-card" >
+  <article class="card" style="--angle:20deg">
+    <img class="card-img" [src]="equipos[21]?.team?.logos?.[0]?.href">
+    <div class="card-data">
+      <span class="card-num">22/30</span>
+      <h2>{{equipos[21]?.team?.displayName}}</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <footer>
+        <label for="radio-21" aria-label="Previous">&#10094;</label>
+        <label for="radio-23" aria-label="Next">&#10095;</label>
+      </footer>
+      </div>
+  </article>
+
+  <input type="radio" id="radio-23" name="radio-card" >
+  <article class="card" style="--angle:20deg">
+    <img class="card-img" [src]="equipos[22]?.team?.logos?.[0]?.href">
+    <div class="card-data">
+      <span class="card-num">23/30</span>
+      <h2>{{equipos[22]?.team?.displayName}}</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <footer>
+        <label for="radio-22" aria-label="Previous">&#10094;</label>
+        <label for="radio-24" aria-label="Next">&#10095;</label>
+      </footer>
+      </div>
+  </article>
+
+  <input type="radio" id="radio-24" name="radio-card" >
+  <article class="card" style="--angle:20deg">
+    <img class="card-img" [src]="equipos[23]?.team?.logos?.[0]?.href">
+    <div class="card-data">
+      <span class="card-num">24/30</span>
+      <h2>{{equipos[23]?.team?.displayName}}</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <footer>
+        <label for="radio-23" aria-label="Previous">&#10094;</label>
+        <label for="radio-25" aria-label="Next">&#10095;</label>
+      </footer>
+      </div>
+  </article>
+
+  <input type="radio" id="radio-25" name="radio-card" >
+  <article class="card" style="--angle:20deg">
+    <img class="card-img" [src]="equipos[24]?.team?.logos?.[0]?.href">
+    <div class="card-data">
+      <span class="card-num">25/30</span>
+      <h2>{{equipos[24]?.team?.displayName}}</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <footer>
+        <label for="radio-24" aria-label="Previous">&#10094;</label>
+        <label for="radio-26" aria-label="Next">&#10095;</label>
+      </footer>
+      </div>
+  </article>
+
+  <input type="radio" id="radio-26" name="radio-card" >
+  <article class="card" style="--angle:20deg">
+    <img class="card-img" [src]="equipos[25]?.team?.logos?.[0]?.href">
+    <div class="card-data">
+      <span class="card-num">26/30</span>
+      <h2>{{equipos[25]?.team?.displayName}}</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <footer>
+        <label for="radio-25" aria-label="Previous">&#10094;</label>
+        <label for="radio-27" aria-label="Next">&#10095;</label>
+      </footer>
+      </div>
+  </article>
+
+  <input type="radio" id="radio-27" name="radio-card" >
+  <article class="card" style="--angle:20deg">
+    <img class="card-img" [src]="equipos[26]?.team?.logos?.[0]?.href">
+    <div class="card-data">
+      <span class="card-num">27/30</span>
+      <h2>{{equipos[26]?.team?.displayName}}</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <footer>
+        <label for="radio-26" aria-label="Previous">&#10094;</label>
+        <label for="radio-28" aria-label="Next">&#10095;</label>
+      </footer>
+      </div>
+  </article>
+
+  <input type="radio" id="radio-28" name="radio-card" >
+  <article class="card" style="--angle:20deg">
+    <img class="card-img" [src]="equipos[27]?.team?.logos?.[0]?.href">
+    <div class="card-data">
+      <span class="card-num">28/30</span>
+      <h2>{{equipos[27]?.team?.displayName}}</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <footer>
+        <label for="radio-27" aria-label="Previous">&#10094;</label>
+        <label for="radio-29" aria-label="Next">&#10095;</label>
+      </footer>
+      </div>
+  </article>
+
+  <input type="radio" id="radio-29" name="radio-card" >
+  <article class="card" style="--angle:20deg">
+    <img class="card-img" [src]="equipos[28]?.team?.logos?.[0]?.href">
+    <div class="card-data">
+      <span class="card-num">29/30</span>
+      <h2>{{equipos[28]?.team?.displayName}}</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <footer>
+        <label for="radio-28" aria-label="Previous">&#10094;</label>
+        <label for="radio-30" aria-label="Next">&#10095;</label>
+      </footer>
+      </div>
+  </article>
+
+  <input type="radio" id="radio-30" name="radio-card" >
+  <article class="card" style="--angle:20deg">
+    <img class="card-img" [src]="equipos[29]?.team?.logos?.[0]?.href">
+    <div class="card-data">
+      <span class="card-num">30/30</span>
+      <h2>{{equipos[29]?.team?.displayName}}</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <footer>
+        <label for="radio-29" aria-label="Previous">&#10094;</label>
+        <label for="radio-31" aria-label="Next">&#10095;</label>
+      </footer>
+      </div>
+  </article>
+</div> -->

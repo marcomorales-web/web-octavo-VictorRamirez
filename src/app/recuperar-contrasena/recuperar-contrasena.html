@@ -69,7 +69,7 @@
 
 </form> -->
 
-<div class="pagina-recuperar">
+<!-- <div class="pagina-recuperar">
 
   <form class="login"
         @formAnim
@@ -86,6 +86,8 @@
         <input
           type="text"
           placeholder="Nombre"
+          [(ngModel)]="nombre"
+          name="nombre"
           (focus)="setFocus('nombre')"
           (blur)="clearFocus()"
           [@inputAnim]="inputFocus === 'nombre' ? 'active' : 'inactive'"
@@ -97,6 +99,8 @@
         <input
           type="email"
           placeholder="Correo electrónico"
+          [(ngModel)]="correo"
+          name="correo"
           (focus)="setFocus('correo')"
           (blur)="clearFocus()"
           [@inputAnim]="inputFocus === 'correo' ? 'active' : 'inactive'"
@@ -107,6 +111,142 @@
     <button type="button" class="entrar" (click)="verificarDatos()">
       Verificar datos
     </button>
+
+    <p *ngIf="mensajeError" class="error-text">
+      {{ mensajeError }}
+    </p>
+
+    <div *ngIf="mostrarCambio" class="inputs-wrapper cambio-contrasena">
+
+      <div class="grupo-registro icon-input">
+        <span class="icon bate"></span>
+        <input
+          type="password"
+          placeholder="Nueva contraseña"
+          [(ngModel)]="nuevaContrasenna"
+          name="nuevaContrasenna"
+        >
+      </div>
+
+      <div class="grupo-registro icon-input">
+        <span class="icon pelota"></span>
+        <input
+          type="password"
+          placeholder="Confirmar contraseña"
+          [(ngModel)]="confirmarContrasenna"
+          name="confirmarContrasenna"
+        >
+      </div>
+
+      <button type="button" class="entrar" (click)="cambiarContrasena()">
+        Cambiar contraseña
+      </button>
+      <p *ngIf="mensajeExito" class="exito-text">
+        {{ mensajeExito }}
+      </p>
+
+    </div>
+
+    <p class="registro" @fadeAnim>
+      ¿Ya recordaste tu contraseña?
+      <a routerLink="/login">Inicia sesión</a>
+    </p>
+
+  </form>
+
+</div> -->
+
+<div class="pagina-recuperar">
+
+  <form class="login"
+        @formAnim
+        [@errorAnim]="errorState"
+        [@logoBreathing]="logoState">
+
+    <div class="logo-wrapper" @logoAnim>
+      <div class="logo-mlb"></div>
+    </div>
+
+    <div *ngIf="!mostrarCambio" @fadeAnim>
+      <div class="inputs-wrapper">
+        <div class="grupo-registro icon-input">
+          <span class="icon pelota"></span>
+          <input
+            type="text"
+            placeholder="Nombre"
+            [(ngModel)]="nombre"
+            name="nombre"
+            (focus)="setFocus('nombre')"
+            (blur)="clearFocus()"
+            [@inputAnim]="inputFocus === 'nombre' ? 'active' : 'inactive'"
+          >
+        </div>
+
+        <div class="grupo-registro icon-input">
+          <span class="icon bate"></span>
+          <input
+            type="email"
+            placeholder="Correo electrónico"
+            [(ngModel)]="correo"
+            name="correo"
+            (focus)="setFocus('correo')"
+            (blur)="clearFocus()"
+            [@inputAnim]="inputFocus === 'correo' ? 'active' : 'inactive'"
+          >
+        </div>
+      </div>
+
+      <button type="button" class="entrar" (click)="verificarDatos()">
+        Verificar datos
+      </button>
+
+      <p *ngIf="mensajeExito" class="exito-text">
+        {{ mensajeExito }}
+      </p>
+
+      <p *ngIf="mensajeError" class="error-text">
+        {{ mensajeError }}
+      </p>
+    </div>
+
+    <div *ngIf="mostrarCambio" class="inputs-wrapper cambio-contrasena" @fadeAnim>
+
+      <div class="grupo-registro icon-input">
+        <span class="icon bate"></span>
+        <input
+          type="password"
+          placeholder="Nueva contraseña"
+          [(ngModel)]="nuevaContrasenna"
+          name="nuevaContrasenna"
+        >
+      </div>
+
+      <div class="grupo-registro icon-input">
+        <span class="icon pelota"></span>
+        <input
+          type="password"
+          placeholder="Confirmar contraseña"
+          [(ngModel)]="confirmarContrasenna"
+          name="confirmarContrasenna"
+        >
+      </div>
+
+      <button
+        type="button"
+        class="entrar"
+        (click)="cambiarContrasena()">
+        Cambiar contraseña
+      </button>
+
+      <p *ngIf="mensajeExito" class="exito-text">
+        {{ mensajeExito }}
+      </p>
+
+      <p *ngIf="mensajeError" class="error-text">
+        {{ mensajeError }}
+      </p>
+
+    </div>
 
     <p class="registro" @fadeAnim>
       ¿Ya recordaste tu contraseña?

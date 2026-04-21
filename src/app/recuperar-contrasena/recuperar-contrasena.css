@@ -157,3 +157,21 @@
 .recuperar-contrasena:hover {
   text-decoration: underline;
 }
+
+
+.inputs-wrapper {
+  margin-top: 20px;
+}
+
+.cambio-contrasena {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+.exito-text {
+  margin-top: 10px;
+  color: #2e7d32;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+}

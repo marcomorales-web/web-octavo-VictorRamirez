@@ -22,6 +22,10 @@ export class MlbService {
   private baseUrl = 'https://statsapi.mlb.com/api/v1';
   private baseUrlV11 = 'https://statsapi.mlb.com/api/v1.1';
 
+
+  //API https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams
+  private espnUrl = 'https://site.api.espn.com/apis/site/v2/sports/baseball/mlb';
+
   constructor(private http: HttpClient) {}
 
 
@@ -31,5 +35,9 @@ export class MlbService {
 
   obtenerDetalleJuego(gamePk: number) {
     return this.http.get(`${this.baseUrlV11}/game/${gamePk}/feed/live`);
+  }
+
+  obtenerEquipos() {
+    return this.http.get(`${this.espnUrl}/teams`);
   }
 }

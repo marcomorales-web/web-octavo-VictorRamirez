@@ -1,12 +1,8 @@
 <link rel="stylesheet" href="rey-deportes.css">
 
 <header class="barra-superior">
-
   <div class="contenido-barra">
-
     <div class="logo"></div>
-
-
     <nav class="menu">
       <a routerLink="/inicio">Inicio</a>
       <a routerLink="/resultados">Resultados</a>
@@ -14,11 +10,186 @@
       <a routerLink="/posiciones">Tablas de posiciones</a>
       <a routerLink="/equipos">Equipos</a>
     </nav>
-
     <div class="perfil">
       <span class="nombre-usuario">Mi Perfil ▾</span>
     </div>
-
   </div>
 </header>
 
+<section class="hero-section" #heroRef>
+  <div class="hero-bg-img"></div>
+  <div class="hero-bg-lines"></div>
+  <div class="hero-contenido">
+    <span class="hero-badge">El Rey de los Deportes</span>
+    <h1 class="hero-titulo">
+      “El beisbol es un juego de milímetros”<br>
+      
+    </h1>
+    <div class="hero-divisor">
+      <span class="linea"></span>
+      <span class="rombo"></span>
+      <span class="linea"></span>
+    </div>
+    <p class="hero-subtitulo">
+      Más de 170 años de historia, pasión y leyenda en un solo diamante.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat" *ngFor="let s of stats">
+        <span class="hero-stat-num">{{ s.num }}</span>
+        <span class="hero-stat-lbl">{{ s.lbl }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-pelota">⚾</div>
+</section>
+
+<!-- HISTORIA -->
+<section class="historia-section reveal-section" #historiaRef>
+  <div class="seccion-inner">
+    <div class="seccion-header">
+      <span class="seccion-badge">Historia</span>
+      <h2 class="seccion-titulo">¿Por qué es el rey?</h2>
+    </div>
+    <div class="historia-grid">
+      <div class="historia-texto">
+        <p>
+          El béisbol nació en los campos de tierra de la América del siglo XIX, un deporte humilde que poco a poco se convirtió en el latido de una nación entera. Sus raíces se remontan a 1839, cuando el mito popular situó su invención en Cooperstown, Nueva York.
+        </p>
+        <blockquote class="historia-cita">
+          "El béisbol es la única actividad humana donde un bateador puede fallar el 70% de las veces y aun así ser considerado el mejor del mundo."
+        </blockquote>
+        <p>
+          Es el único deporte donde no hay reloj, donde el tiempo no existe hasta que se registra el último out. Un equipo siempre tiene oportunidad de remontar, sin importar el marcador ni los innings restantes.
+        </p>
+        <p>
+          Durante la Gran Depresión y las dos Guerras Mundiales, el béisbol fue el ancla emocional de millones de familias. Jackie Robinson, al romper la barrera racial en 1947, convirtió el diamante en campo de batalla por los derechos civiles.
+        </p>
+        <p>
+          Hoy, el béisbol sigue siendo el puente más largo entre generaciones: abuelos y nietos que comparten el mismo idioma de curvas, home runs y bases robadas.
+        </p>
+      </div>
+      <div class="historia-tarjetas">
+        <div class="h-card" *ngFor="let c of historiaTarjetas">
+          <span class="h-card-icon">{{ c.icon }}</span>
+          <strong class="h-card-titulo">{{ c.titulo }}</strong>
+          <span class="h-card-desc">{{ c.desc }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hof-section reveal-section" #hofRef>
+  <div class="seccion-inner">
+    <div class="seccion-header">
+      <span class="seccion-badge">Salón de la Fama</span>
+      <h2 class="seccion-titulo">Las leyendas inmortales</h2>
+      <p class="seccion-subtitulo">Inaugurado en 1939 · Cooperstown, Nueva York · 351 inmortales</p>
+    </div>
+
+    <div class="eras-tabs">
+      <button
+        *ngFor="let era of eras"
+        class="era-tab"
+        [class.activo]="eraActiva === era.id"
+        (click)="cambiarEra(era.id)"
+      >
+        {{ era.nombre }}
+      </button>
+    </div>
+
+    <div class="tl-contenedor">
+      <div class="tl-linea"></div>
+      <div
+        class="tl-item"
+        *ngFor="let jugador of jugadoresFiltrados(); let i = index"
+        [style.animation-delay]="i * 80 + 'ms'"
+        (click)="abrirModal(jugador)"
+      >
+        <div class="tl-punto" [ngClass]="'punto-' + eraActiva"></div>
+        <div class="tl-card">
+          <span class="tl-anio">{{ jugador.anio }}</span>
+          <strong class="tl-nombre">{{ jugador.nombre }}</strong>
+          <p class="tl-desc">{{ jugador.desc }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOMENTOS HISTÓRICOS -->
+<section class="momentos-section reveal-section" #momentosRef>
+  <div class="seccion-inner">
+    <div class="seccion-header">
+      <span class="seccion-badge">Momentos épicos</span>
+      <h2 class="seccion-titulo">Momentos que detuvieron el tiempo</h2>
+      <p class="seccion-subtitulo">Jugadas, series y equipos que escribieron la historia para siempre</p>
+    </div>
+    <div class="momentos-grid">
+      <div
+        class="momento-card"
+        *ngFor="let m of momentos; let i = index"
+        [style.animation-delay]="i * 100 + 'ms'"
+        (click)="abrirModalMomento(m)"
+      >
+        <div class="momento-icono" [ngStyle]="{'background': m.color}">{{ m.icon }}</div>
+        <div class="momento-info">
+          <span class="momento-anio">{{ m.anio }}</span>
+          <strong class="momento-titulo">{{ m.titulo }}</strong>
+          <p class="momento-desc">{{ m.desc }}</p>
+          <span class="momento-tag" [ngStyle]="{'background': m.tagBg, 'color': m.tagColor}">{{ m.tag }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRASE FINAL -->
+<section class="frase-section reveal-section" #fraseRef>
+  <div class="seccion-inner frase-inner">
+    <span class="frase-eyebrow">Frase iconica</span>
+    <div class="frase-card">
+      <span class="frase-comilla">"</span>
+      <p class="frase-texto">
+        Enséñame béisbol y yo te enseño relatividad...<br>
+        No, mejor no. Tú aprenderás relatividad más rápido<br>
+        de lo que yo aprendo béisbol.
+      </p>
+      <div class="frase-divisor">
+        <span class="linea"></span>
+        <span class="rombo"></span>
+        <span class="linea"></span>
+      </div>
+      <div class="frase-autor">
+        <div class="autor-avatar">AE</div>
+        <div>
+          <strong class="autor-nombre">Albert Einstein</strong>
+          <span class="autor-cargo">Físico teórico · Premio Nobel de Física, 1921</span>
+        </div>
+      </div>
+      <p class="frase-contexto">
+        Dicho al encontrarse con el jugador Moe Berg — el único pelotero al que llamaban "el Einstein con guantes" —.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="modal-overlay" *ngIf="modalJugador" (click)="cerrarModal()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <button class="modal-cerrar" (click)="cerrarModal()">✕</button>
+    <span class="modal-anio">{{ modalJugador!.anio }}</span>
+    <h3 class="modal-nombre">{{ modalJugador!.nombre }}</h3>
+    <p class="modal-desc">{{ modalJugador!.desc }}</p>
+    <p class="modal-extra">{{ modalJugador!.extra }}</p>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="modalMomento" (click)="cerrarModalMomento()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <button class="modal-cerrar" (click)="cerrarModalMomento()">✕</button>
+    <div class="modal-icono" [ngStyle]="{'background': modalMomento!.color}">{{ modalMomento!.icon }}</div>
+    <span class="modal-anio">{{ modalMomento!.anio }}</span>
+    <h3 class="modal-nombre">{{ modalMomento!.titulo }}</h3>
+    <p class="modal-desc">{{ modalMomento!.descLarga }}</p>
+  </div>
+</div>

@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReyDeportesComponent } from './rey-deportes';
 
-import { ReyDeportes } from './rey-deportes';
-
-describe('ReyDeportes', () => {
-  let component: ReyDeportes;
-  let fixture: ComponentFixture<ReyDeportes>;
+describe('ReyDeportesComponent', () => {
+  let component: ReyDeportesComponent;
+  let fixture: ComponentFixture<ReyDeportesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReyDeportes]
+      imports: [ReyDeportesComponent] // correcto porque es standalone
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ReyDeportes);
+    fixture = TestBed.createComponent(ReyDeportesComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

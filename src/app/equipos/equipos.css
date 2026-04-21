@@ -1,3 +1,5 @@
+
+
 .barra-superior {
   width: 100%;
   height: 90px;
@@ -67,9 +69,10 @@
 }
 
 
-/* 
+
 *,::before,::after{
-  margin: 0;
+  margin:0;
+  box-sizing: border-box;
 }
 
 @property --angle {
@@ -78,729 +81,343 @@
   inherits: true;
 }
 
-html {
-	color-scheme: dark light;
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #f4f4f4; 
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
 }
-img{
-  max-width: 100%;
+
+.background-estadio{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+
+
+  z-index: -1;
+}
+
+
+.buscador {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 100PX;
+  position: relative;
+  z-index: 2;
+}
+
+input[type="text"] {
+  width: 300px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  outline: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.cards {
+
+  --img-w: 220px;
+  --duration: 400ms;
+  --img-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+
+  margin: 80px auto;
+
+  display: grid;
+  place-items: center;
+  place-content: center;
+
+  min-height: calc(80vh - 600px); 
+}
+
+.card {
+  grid-area: 1/1;
+  display: grid;
+  place-items: center;
+  grid-template-columns: var(--img-w) auto;
+  gap: 3rem;
+  z-index: 1;
+  width: 100%;
+  transition: z-index var(--duration) step-end;
+}
+
+
+.card-data p{
+  color: white;
+}
+
+
+.card-data h2{
+  color: white;
+}
+
+.card-data{
+  background: rgba(40, 40, 40, 0.75);
+  backdrop-filter: blur(6px);
+
+  padding: 15px;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+
+  max-width: 90%;
 }
 
 input[type="radio"] {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
+  display: none;
 }
 
-body{
-
-  min-height: 100svh;
-  display: grid;
-  place-content: center;
-  margin: 0;
-  padding: 1rem;
-  font: 1rem system-ui;
-}
-
-.cards{
-  --img-w: 200px;
-  --duration: 300ms;
-  --img-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
-  width: min(100% - 4rem, 800px);
-  margin-inline: auto;
-  display: grid;
-  
-  counter-reset: my-counter;
-}
-
-.card{
-  --cards-grid-cols: auto;
-  --cards-grid-rows: var(--img-w) auto;
-  --cards-grid-gap: 2rem;
-  --cards-footer-justify: center;
-  
-  grid-area: 1/1;
-  display: grid;
- place-items: center; 
-  grid-template-columns: var(--cards-grid-cols);
-  grid-template-rows: var(--cards-grid-rows);
-  gap: var(--cards-grid-gap);
-  
-}
-
-@media (600px < width){
-  .card{
-      --cards-grid-cols: var(--img-w) auto;
-      --cards-grid-rows: auto;
-      --cards-grid-gap: 4rem;
-      --cards-footer-justify: start;
-  }
-}
-
-
-.card-img{
-  width: 200px;
-  height: 200px;
-  aspect-ratio: 1 / 1 ;
+.card-img {
+  width: var(--img-w);
+  height: var(--img-w);
   rotate: var(--angle, 0deg);
-  border-radius: 10px;
-  border: 3px solid #FFF;
-  overflow: hidden;
-  transform-origin: center;
-  object-fit: cover;
-  box-shadow: 0 0 5px 3px rgba(0 0 0 / .05);
+  border-radius: 15px;
+  border: 4px solid #FFF;
+  background: white;
+  object-fit: contain;
+  padding: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transition: rotate var(--duration) var(--img-easing);
 }
 
-
-
-input:nth-of-type(1):checked + .card ~ .card > .card-img{
-  animation: straighten-img-1 calc(var(--duration) * 2) forwards;
-  animation-timing-function: var(--img-easing);
-}
-.card:has(~input:nth-of-type(2):checked) > .card-img,
-input:nth-of-type(2):checked + .card ~ .card > .card-img{
-  animation: straighten-img-2 calc(var(--duration) * 2) forwards;
-  animation-timing-function: var(--img-easing);
-}
-.card:has(~input:nth-of-type(3):checked) > .card-img,
-input:nth-of-type(3):checked + .card ~ .card > .card-img{
-  animation: straighten-img-3 calc(var(--duration) * 2) forwards;
-  animation-timing-function: var(--img-easing);
-}
-.card:has(~input:nth-of-type(4):checked) > .card-img,
-input:nth-of-type(4):checked + .card ~ .card > .card-img{
-  animation: straighten-img-4 calc(var(--duration) * 2) forwards;
-  animation-timing-function: var(--img-easing);
-}
-.card:has(~input:nth-of-type(5):checked) > .card-img,
-input:nth-of-type(5):checked + .card ~ .card > .card-img{
-  animation: straighten-img-5 calc(var(--duration) * 2) forwards;
-  animation-timing-function: var(--img-easing);
-}
-.card:has(~input:nth-of-type(6):checked) > .card-img,
-input:nth-of-type(6):checked + .card ~ .card > .card-img{
-  animation: straighten-img-6 calc(var(--duration) * 2) forwards;
-  animation-timing-function: var(--img-easing);
-}
-.card:has(~input:nth-of-type(7):checked) > .card-img,
-input:nth-of-type(7):checked + .card ~ .card > .card-img{
-  animation: straighten-img-7 calc(var(--duration) * 2) forwards;
-  animation-timing-function: var(--img-easing);
+/* Animaciones de barajado */
+.card:has(~ input:checked) > .card-img,
+input:checked + .card ~ .card > .card-img {
+  animation: straighten-img calc(var(--duration) * 2) forwards;
 }
 
-.card:has(~input:nth-of-type(8):checked) > .card-img,
-input:nth-of-type(8):checked + .card ~ .card > .card-img{
-  animation: straighten-img-8 calc(var(--duration) * 2) forwards;
-  animation-timing-function: var(--img-easing);
+@keyframes straighten-img {
+  50% { --angle: 0deg; }
 }
 
-@keyframes straighten-img-1 { 50%{ --angle: 0deg;} }
-@keyframes straighten-img-2 { 50%{ --angle: 0deg;} }
-@keyframes straighten-img-3 { 50%{ --angle: 0deg;} }
-@keyframes straighten-img-4 { 50%{ --angle: 0deg;} }
-@keyframes straighten-img-5 { 50%{ --angle: 0deg;} }
-@keyframes straighten-img-6 { 50%{ --angle: 0deg;} }
-@keyframes straighten-img-7 { 50%{ --angle: 0deg;} }
-@keyframes straighten-img-8 { 50%{ --angle: 0deg;} }
-
-
-.card{
-  z-index: -1;
-}
-input:checked + .card{
-  z-index:10 !important;
-}
-
-.card:has(+input:checked){
-  z-index:9;
-}
-
-.card:has(+input + .card + input:checked){
-  z-index:8;
-}
-
-.card:has(+input + .card +input + .card + input:checked){
-  z-index:7;
-}
-
-.card:has(+input + .card +input + .card +input + .card + input:checked){
-  z-index:6;
-}
-.card:has(+input + .card +input + .card +input + .card +input + .card + input:checked){
-  z-index:5;
-}
-
-.card:has(+input + .card +input + .card +input +input + .card +input + .card +input + .card + input:checked){
-  z-index:4;
-}
-
-.card:has(+input + .card +input + .card +input  + .card +input +input + .card +input + .card +input + .card + input:checked){
-  z-index:3;
-}
-
-.card-data{
-  display: grid;
-  gap: 1rem;
-}
-.card-data > .card-num{
-  opacity: var(--data-opacity, 0);
-  font-size: .8rem;
-  color: #666;
-}
-.card-data > p{
-  font-size: 0.9rem;
-
-}
-.card-data > h2,
-.card-data > p{
-  transition: var(--duration) ease-in-out;
-  transition-delay: var(--data-delay,0ms);
-  opacity: var(--data-opacity, 0);
-  translate: 0 var(--data-y, 20px);
-}
-.card-data > footer{
-  display: flex;
-  justify-content: var(--cards-footer-justify);
-  gap: 2rem;
-}
-.card-data > footer label{
-  margin-block-start: auto;
-  cursor: pointer;
-  pointer-events: var(--card-events, none);
-  opacity: var(--data-opacity, 0);
-  transition: color var(--duration) ease-in-out;
-  color: var(--label-clr-txt,#000);
-  background-color:var(--label-clr-bg,#EEE);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  aspect-ratio: 1/1;
-  display: grid;
-  place-content: center;
-  transition: background-color 300ms ease-in-out,color  300ms ease-in-out;
-}
-
-
-input:checked:focus-visible + .card > .card-data > footer label,
-.card-data > footer label:hover{
-  --label-clr-txt: #FFF;
-  --label-clr-bg: steelblue;
-}
-
-input:checked + .card{
+input:checked + .card {
+  z-index: 50 !important;
   --data-opacity: 1;
   --data-y: 0;
-  --data-delay: var(--duration);
   --card-events: auto;
-  transition: z-index;
-  transition-delay: 300ms;
-
 }
 
-input:checked +.card > .card-img{
+input:checked + .card > .card-img {
   animation: reveal-img calc(var(--duration) * 2) forwards;
 }
 
-@keyframes reveal-img{
-  50%{
-    translate: -150% 0;
+@keyframes reveal-img {
+  50% {
+    translate: -110% 0;
     --angle: 0deg;
   }
+  100% {
+    translate: 0 0;
+    --angle: 0deg;
+  }
+}
+
+/* Datos */
+.card-data {
+  opacity: var(--data-opacity, 0);
+  transform: translateY(var(--data-y, 20px));
+  transition: all var(--duration) ease-out;
+  pointer-events: var(--card-events, none);
+  text-align: left;
+  margin-left: 80px;
+}
+
+.card-data h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.card-data .card-num {
+  color: #888;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.card-data footer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 20px;
+}
+
+.card-data footer label {
+  width: 40px;
+  height: 40px;
+  background: #eee;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card-data footer label:hover {
+  background: #333;
+  color: white;
+}
+
+@media (max-width: 1280px) {
+  .cards {
+    --img-w: 180px;
+    max-width: 750px;
+  }
+
+  .card-data h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cards {
+    --img-w: 150px;
+    max-width: 650px;
+    margin: 10px auto;
+    margin-top: 40px;
+  }
+
+  .buscador {
+    margin-top: 80px;
+  }
+
+  .card-data h2 {
+    font-size: 1.6rem;
+  }
+
+  .card-data {
+    margin-left: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 1rem;
+  }
+
+  .cards {
+    --img-w: 140px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .card-data {
+    margin-left: 0;
+    text-align: center;
+    width: 90%;
+  }
+
+  .buscador {
+    margin-top: 40px;
+  }
+
+  .card-data h2 {
+    font-size: 1.4rem;
+  }
+
+  .menu {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards {
+    --img-w: 110px;
+  }
+
+  .card-data h2 {
+    font-size: 1.1rem;
+  }
+
+  .card-data p {
+    font-size: 12px;
+  }
+
+  .buscador {
+    margin-top: 20px;
+  }
+
+  input[type="text"] {
+    width: 85%;
+  }
+}
+
+/* .footer{
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, #041E42, #020f24);
+  color: white;
+  padding: 40px 20px 10px;
+
+  margin-top: 180px;
+}
+
+.footer-container{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer-section{
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-section h3,
+.footer-section h4{
+  margin-bottom: 10px;
+}
+
+.footer-section p{
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.footer-section ul{
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li{
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a{
+  color: white;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.footer-section ul li a:hover{
+  opacity: 1;
+  color: #4da3ff;
+}
+
+.footer-bottom{
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 20px;
+  padding-top: 10px;
+  font-size: 13px;
+  opacity: 0.7;
 } */
-
-
-*,::before,::after{
-  margin:0;
-}
-
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: true;
-}
-
-/* general styling */
-
-html{
-  color-scheme: dark light;
-}
-
-img{
-  max-width:100%;
-}
-
-/* ocultar radios */
-
-input[type="radio"]{
-  position:absolute;
-  width:1px;
-  height:1px;
-  padding:0;
-  margin:-1px;
-  overflow:hidden;
-  clip:rect(0,0,0,0);
-  white-space:nowrap;
-  border-width:0;
-}
-
-/* body{
-
-  min-height:100svh;
-  display:grid;
-  place-content:center;
-  margin:0;
-  padding:1rem;
-  font:1rem system-ui;
-
-} */
-
-body{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin:0;
-}
-
-/* .cards{
-
-  --img-w:200px;
-  --duration:300ms;
-  --img-easing:cubic-bezier(0.34,1.56,0.64,1);
-
-  width:min(100% - 4rem,900px);
-  margin-inline:auto;
-  display:grid;
-  counter-reset:my-counter;
-
-} */
-
-.cards{
-
-  --img-w:200px;
-  --duration:300ms;
-  --img-easing:cubic-bezier(0.34,1.56,0.64,1);
-
-  width:min(100% - 4rem,900px);
-
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-
-  display:grid;
-
-  counter-reset:my-counter;
-
-}
-
-.card{
-
-  --cards-grid-cols:auto;
-  --cards-grid-rows:var(--img-w) auto;
-  --cards-grid-gap:2rem;
-  --cards-footer-justify:center;
-
-  grid-area:1/1;
-  display:grid;
-  place-items:center;
-
-  grid-template-columns:var(--cards-grid-cols);
-  grid-template-rows:var(--cards-grid-rows);
-
-  gap:var(--cards-grid-gap);
-
-}
-
-@media (600px < width){
-
-.card{
-
---cards-grid-cols:var(--img-w) auto;
---cards-grid-rows:auto;
---cards-grid-gap:4rem;
---cards-footer-justify:start;
-
-}
-
-}
-
-.card-img{
-
-  width:200px;
-  height:200px;
-
-  aspect-ratio:1/1;
-
-  rotate:var(--angle,0deg);
-
-  border-radius:10px;
-  border:3px solid #FFF;
-
-  overflow:hidden;
-
-  transform-origin:center;
-
-  object-fit:cover;
-
-  box-shadow:0 0 5px 3px rgba(0 0 0 / .05);
-
-}
-
-/* animaciones para 30 tarjetas */
-
-input:nth-of-type(1):checked + .card ~ .card > .card-img{
-  animation:straighten-img-1 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(2):checked) > .card-img,
-input:nth-of-type(2):checked + .card ~ .card > .card-img{
-  animation:straighten-img-2 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(3):checked) > .card-img,
-input:nth-of-type(3):checked + .card ~ .card > .card-img{
-  animation:straighten-img-3 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(4):checked) > .card-img,
-input:nth-of-type(4):checked + .card ~ .card > .card-img{
-  animation:straighten-img-4 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(5):checked) > .card-img,
-input:nth-of-type(5):checked + .card ~ .card > .card-img{
-  animation:straighten-img-5 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(6):checked) > .card-img,
-input:nth-of-type(6):checked + .card ~ .card > .card-img{
-  animation:straighten-img-6 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(7):checked) > .card-img,
-input:nth-of-type(7):checked + .card ~ .card > .card-img{
-  animation:straighten-img-7 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(8):checked) > .card-img,
-input:nth-of-type(8):checked + .card ~ .card > .card-img{
-  animation:straighten-img-8 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(9):checked) > .card-img,
-input:nth-of-type(9):checked + .card ~ .card > .card-img{
-  animation:straighten-img-9 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(10):checked) > .card-img,
-input:nth-of-type(10):checked + .card ~ .card > .card-img{
-  animation:straighten-img-10 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(11):checked) > .card-img,
-input:nth-of-type(11):checked + .card ~ .card > .card-img{
-  animation:straighten-img-11 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(12):checked) > .card-img,
-input:nth-of-type(12):checked + .card ~ .card > .card-img{
-  animation:straighten-img-12 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(13):checked) > .card-img,
-input:nth-of-type(13):checked + .card ~ .card > .card-img{
-  animation:straighten-img-13 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(14):checked) > .card-img,
-input:nth-of-type(14):checked + .card ~ .card > .card-img{
-  animation:straighten-img-14 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(15):checked) > .card-img,
-input:nth-of-type(15):checked + .card ~ .card > .card-img{
-  animation:straighten-img-15 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(16):checked) > .card-img,
-input:nth-of-type(16):checked + .card ~ .card > .card-img{
-  animation:straighten-img-16 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(17):checked) > .card-img,
-input:nth-of-type(17):checked + .card ~ .card > .card-img{
-  animation:straighten-img-17 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(18):checked) > .card-img,
-input:nth-of-type(18):checked + .card ~ .card > .card-img{
-  animation:straighten-img-18 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(19):checked) > .card-img,
-input:nth-of-type(19):checked + .card ~ .card > .card-img{
-  animation:straighten-img-19 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(20):checked) > .card-img,
-input:nth-of-type(20):checked + .card ~ .card > .card-img{
-  animation:straighten-img-20 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(21):checked) > .card-img,
-input:nth-of-type(21):checked + .card ~ .card > .card-img{
-  animation:straighten-img-21 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(22):checked) > .card-img,
-input:nth-of-type(22):checked + .card ~ .card > .card-img{
-  animation:straighten-img-22 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(23):checked) > .card-img,
-input:nth-of-type(23):checked + .card ~ .card > .card-img{
-  animation:straighten-img-23 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(24):checked) > .card-img,
-input:nth-of-type(24):checked + .card ~ .card > .card-img{
-  animation:straighten-img-24 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(25):checked) > .card-img,
-input:nth-of-type(25):checked + .card ~ .card > .card-img{
-  animation:straighten-img-25 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(26):checked) > .card-img,
-input:nth-of-type(26):checked + .card ~ .card > .card-img{
-  animation:straighten-img-26 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(27):checked) > .card-img,
-input:nth-of-type(27):checked + .card ~ .card > .card-img{
-  animation:straighten-img-27 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(28):checked) > .card-img,
-input:nth-of-type(28):checked + .card ~ .card > .card-img{
-  animation:straighten-img-28 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(29):checked) > .card-img,
-input:nth-of-type(29):checked + .card ~ .card > .card-img{
-  animation:straighten-img-29 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-.card:has(~input:nth-of-type(30):checked) > .card-img,
-input:nth-of-type(30):checked + .card ~ .card > .card-img{
-  animation:straighten-img-30 calc(var(--duration)*2) forwards;
-  animation-timing-function:var(--img-easing);
-}
-
-/* keyframes */
-
-@keyframes straighten-img-1{50%{--angle:0deg}}
-@keyframes straighten-img-2{50%{--angle:0deg}}
-@keyframes straighten-img-3{50%{--angle:0deg}}
-@keyframes straighten-img-4{50%{--angle:0deg}}
-@keyframes straighten-img-5{50%{--angle:0deg}}
-@keyframes straighten-img-6{50%{--angle:0deg}}
-@keyframes straighten-img-7{50%{--angle:0deg}}
-@keyframes straighten-img-8{50%{--angle:0deg}}
-@keyframes straighten-img-9{50%{--angle:0deg}}
-@keyframes straighten-img-10{50%{--angle:0deg}}
-@keyframes straighten-img-11{50%{--angle:0deg}}
-@keyframes straighten-img-12{50%{--angle:0deg}}
-@keyframes straighten-img-13{50%{--angle:0deg}}
-@keyframes straighten-img-14{50%{--angle:0deg}}
-@keyframes straighten-img-15{50%{--angle:0deg}}
-@keyframes straighten-img-16{50%{--angle:0deg}}
-@keyframes straighten-img-17{50%{--angle:0deg}}
-@keyframes straighten-img-18{50%{--angle:0deg}}
-@keyframes straighten-img-19{50%{--angle:0deg}}
-@keyframes straighten-img-20{50%{--angle:0deg}}
-@keyframes straighten-img-21{50%{--angle:0deg}}
-@keyframes straighten-img-22{50%{--angle:0deg}}
-@keyframes straighten-img-23{50%{--angle:0deg}}
-@keyframes straighten-img-24{50%{--angle:0deg}}
-@keyframes straighten-img-25{50%{--angle:0deg}}
-@keyframes straighten-img-26{50%{--angle:0deg}}
-@keyframes straighten-img-27{50%{--angle:0deg}}
-@keyframes straighten-img-28{50%{--angle:0deg}}
-@keyframes straighten-img-29{50%{--angle:0deg}}
-@keyframes straighten-img-30{50%{--angle:0deg}}
-/* stacking */
-
-.card{
-  z-index:-1;
-}
-
-input:checked + .card{
-  z-index:10 !important;
-}
-
-.card:has(+input:checked){
-  z-index:9;
-}
-
-.card:has(+input + .card + input:checked){
-  z-index:8;
-}
-
-.card:has(+input + .card + input + .card + input:checked){
-  z-index:7;
-}
-
-.card:has(+input + .card + input + .card + input + .card + input:checked){
-  z-index:6;
-}
-
-.card:has(+input + .card + input + .card + input + .card + input + .card + input:checked){
-  z-index:5;
-}
-
-.card:has(+input + .card + input + .card + input + .card + input + .card + input + .card + input:checked){
-  z-index:4;
-}
-
-.card:has(+input + .card + input + .card + input + .card + input + .card + input + .card + input + .card + input:checked){
-  z-index:3;
-}
-
-/* datos */
-
-.card-data{
-  display:grid;
-  gap:1rem;
-}
-
-.card-data > .card-num{
-
-  opacity:var(--data-opacity,0);
-  font-size:.8rem;
-  color:#666;
-
-}
-
-.card-data > p{
-  font-size:0.9rem;
-}
-
-.card-data > h2,
-.card-data > p{
-
-  transition:var(--duration) ease-in-out;
-  transition-delay:var(--data-delay,0ms);
-
-  opacity:var(--data-opacity,0);
-
-  translate:0 var(--data-y,20px);
-
-}
-
-.card-data > footer{
-
-  display:flex;
-  justify-content:var(--cards-footer-justify);
-  gap:2rem;
-
-}
-
-.card-data > footer label{
-
-  margin-block-start:auto;
-
-  cursor:pointer;
-
-  pointer-events:var(--card-events,none);
-
-  opacity:var(--data-opacity,0);
-
-  color:var(--label-clr-txt,#000);
-
-  background-color:var(--label-clr-bg,#EEE);
-
-  border-radius:50%;
-
-  width:32px;
-  height:32px;
-
-  display:grid;
-  place-content:center;
-
-  transition:300ms;
-
-}
-
-input:checked:focus-visible + .card > .card-data > footer label,
-.card-data > footer label:hover{
-
-  --label-clr-txt:#FFF;
-  --label-clr-bg:steelblue;
-
-}
-
-input:checked + .card{
-
-  --data-opacity:1;
-  --data-y:0;
-  --data-delay:var(--duration);
-  --card-events:auto;
-
-  transition:z-index;
-  transition-delay:300ms;
-
-}
-
-input:checked + .card > .card-img{
-
-  animation:reveal-img calc(var(--duration)*2) forwards;
-
-}
-
-@keyframes reveal-img{
-
-50%{
-
-translate:-150% 0;
---angle:0deg;
-
-}
-
-}

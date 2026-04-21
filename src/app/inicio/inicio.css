@@ -72,13 +72,104 @@
   background: rgba(255,255,255,0.12);
 }
 
-.Carrusel{
-    width: 100%;
-    height: 87vh;
-    overflow: hidden;
+/* Contenedor principal del carrusel */
+.Carrusel {
     position: relative;
+    width: 100%;
+    height: 500px; /* Ajusta según la altura de tu carrusel */
+    overflow: hidden;
 }
 
+/* Contenedor del texto (Capa sobre las fotos) */
+.Carrusel .texto {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Por encima de las imágenes del <ul> */
+    background: transparent;
+    pointer-events: none; /* Permite clics en el carrusel */
+    font-family: 'Arial Black', sans-serif;
+    text-align: center;
+}
+
+
+.titulo-beisbol {
+    font-family: 'Arial Black', sans-serif; /* Prioriza esta fuente para el estilo deportivo */
+    font-size: 5rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin: 0; /* Eliminamos márgenes que puedan descentrar */
+    padding: 0;
+    line-height: 1;
+    -webkit-text-stroke: 2px #0d1b2a;
+    text-shadow: 0 0 15px #ce1126, 0 0 30px #ce1126;
+    animation: bounceInOverlay 1.5s ease-out, glowOverlay 2s infinite alternate;
+}
+
+.subtitulo {
+    font-family: 'Arial Black', sans-serif;
+    color: #f1d302;
+    font-size: 1.6rem;
+    margin-top: 30px;
+    font-weight: bold;
+    -webkit-text-stroke: 1px #0d1b2a;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    opacity: 0;
+    animation: fadeInOverlay 2s forwards 1.2s;
+}
+
+.pelota-flotante {
+    width: 25px;
+    height: 25px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 0 15px white;
+    animation: homeRunOverlay 5s linear infinite;
+}
+
+/* --- ANIMACIONES --- */
+
+@keyframes bounceInOverlay {
+    0% { transform: translateY(-400px) scale(0.3); opacity: 0; }
+    60% { transform: translateY(20px) scale(1.1); opacity: 1; }
+    100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes glowOverlay {
+    from { text-shadow: 0 0 15px #fff, 0 0 25px #ce1126; }
+    to { text-shadow: 0 0 25px #fff, 0 0 45px #ce1126, 0 0 70px #ce1126; }
+}
+
+@keyframes fadeInOverlay {
+    to { opacity: 1; }
+}
+
+@keyframes homeRunOverlay {
+    0% { left: -100px; top: 80%; transform: scale(1); }
+    20% { left: 50%; top: 80%; transform: scale(1.6); }
+    40% { left: 110%; top: 20%; transform: scale(0.5); opacity: 0; }
+    100% { left: 110%; opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    .titulo-beisbol { font-size: 2.5rem; -webkit-text-stroke: 1px #0d1b2a; }
+    .subtitulo { font-size: 1.1rem; }
+}
+
+.Carrusel {
+  width: 100%;
+  height: calc(100vh - 90px - 170px);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
 .Carrusel ul{
     margin: 0;
     padding: 0;
@@ -99,16 +190,21 @@
     height: 100%;
     object-fit: cover;
 }
-.texto{
+.texto {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(0, 19, 228);
-    font-size: 40px;
-    font-weight: bold;
-    z-index: 2;
-    text-decoration: underline;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Flexbox es la clave para centrar todo */
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    z-index: 5; /* Asegura que esté sobre las imágenes pero bajo el menú si es necesario */
+    pointer-events: none; /* Importante para que puedas hacer clic en lo que haya detrás */
+    text-align: center;
 }
 
 @keyframes carrusel{
@@ -126,4 +222,88 @@
 
     80% { margin-left: -400%; }
     100% { margin-left: -400%; }
+}
+
+html, body, app-root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.Carrusel {
+  flex: 1;
+}
+
+.footer {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(180deg, #041E42, #020f24);
+  color: white;
+  padding: 16px 20px 6px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 150px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.footer-section p {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 3px;
+}
+
+.footer-section ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 11px;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+  opacity: 1;
+  color: #4da3ff;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 10px;
+  padding-top: 6px;
+  font-size: 11px;
+  opacity: 0.7;
 }
