@@ -40,4 +40,14 @@ export class MlbService {
   obtenerEquipos() {
     return this.http.get(`${this.espnUrl}/teams`);
   }
+ //////////////////////////////////////////////
+  obtenerStandings(leagueId?: number) {
+    let url = `${this.baseUrl}/standings?sportId=1`;
+
+    if (leagueId) {
+      url += `&leagueId=${leagueId}`;
+    }
+
+    return this.http.get(url);
+  }
 }

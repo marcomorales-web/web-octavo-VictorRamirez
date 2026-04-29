@@ -35,22 +35,62 @@ export class Auth {
     return { exito: true, mensaje: 'Usuario registrado correctamente' };
   }
 
-  iniciarSesion(email: string, contrasenna: string): { exito: boolean; mensaje: string } {
+  iniciarSesion(email: string, contrasenna: string): { exito: boolean; campo?: string; mensaje: string } {
+  const usuarios = this.obtenerUsuarios();
 
-    const usuarios = this.obtenerUsuarios();
+  const usuarioPorEmail = usuarios.find(u => u.email === email);
+  const usuarioPorPassword = usuarios.find(u => u.password === contrasenna);
 
-    const usuario = usuarios.find(
-      u => u.email === email && u.password === contrasenna
-    );
-
-    if (!usuario) {
-      return { exito: false, mensaje: 'Correo o contraseña incorrectos' };
-    }
-
-    localStorage.setItem(this.claveSesion, JSON.stringify(usuario));
-
-    return { exito: true, mensaje: 'Inicio de sesión exitoso' };
+  if (!usuarioPorEmail && !usuarioPorPassword) {
+    return { exito: false, campo: 'ambos', mensaje: '' };
   }
+
+  if (!usuarioPorEmail) {
+    return { exito: false, campo: 'email', mensaje: 'Este correo no está registrado' };
+  }
+
+  if (usuarioPorEmail.password !== contrasenna) {
+    return { exito: false, campo: 'contrasenna', mensaje: 'Contraseña incorrecta' };
+  }
+
+  localStorage.setItem(this.claveSesion, JSON.stringify(usuarioPorEmail));
+  return { exito: true, mensaje: 'Inicio de sesión exitoso' };
+}
+
+  // iniciarSesion(email: string, contrasenna: string): { exito: boolean; campo?: string; mensaje: string } {
+  //   const usuarios = this.obtenerUsuarios();
+
+  //   const usuarioPorEmail = usuarios.find(u => u.email === email);
+
+  //   if (!usuarioPorEmail) {
+  //     return { exito: false, campo: 'email', mensaje: 'Este correo no está registrado' };
+  //   }
+
+  //   if (usuarioPorEmail.password !== contrasenna) {
+  //     return { exito: false, campo: 'contrasenna', mensaje: 'Contraseña incorrecta' };
+  //   }
+
+  //   localStorage.setItem(this.claveSesion, JSON.stringify(usuarioPorEmail));
+  //   return { exito: true, mensaje: 'Inicio de sesión exitoso' };
+  // }
+
+
+  // iniciarSesion(email: string, contrasenna: string): { exito: boolean; mensaje: string } {
+
+  //   const usuarios = this.obtenerUsuarios();
+
+  //   const usuario = usuarios.find(
+  //     u => u.email === email && u.password === contrasenna
+  //   );
+
+  //   if (!usuario) {
+  //     return { exito: false, mensaje: 'Correo o contraseña incorrectos' };
+  //   }
+
+  //   localStorage.setItem(this.claveSesion, JSON.stringify(usuario));
+
+  //   return { exito: true, mensaje: 'Inicio de sesión exitoso' };
+  // }
 
   obtenerSesion(): any {
     const datos = localStorage.getItem(this.claveSesion);

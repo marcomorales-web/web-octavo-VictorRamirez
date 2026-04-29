@@ -1,0 +1,189 @@
+<link rel="stylesheet" href="tabla-posiciones.css">
+
+<header class="barra-superior">
+  <div class="contenido-barra">
+    <div class="logo"></div>
+    <nav class="menu">
+      <a routerLink="/inicio">Inicio</a>
+      <a routerLink="/resultados">Resultados</a>
+      <a routerLink="/estadistica">Estadisticas</a>
+      <a routerLink="/posiciones">Equipos</a>
+      <a routerLink="/equipos">El Rey de los deportes</a>
+    </nav>
+    <div class="perfil">
+      <span class="nombre-usuario">Mi Perfil ▾</span>
+    </div>
+  </div>
+</header>
+
+<!-- 🔹 NUEVA BARRA CENTRAL -->
+<div class="barra-central">
+  <div class="logo-central">
+    <img src="../../assets/img/mlbLogo.png" alt="MLB Logo" class="img-central" />
+  </div>
+  <div class="divisor-vertical"></div>
+  <div class="filtros">
+    <select [(ngModel)]="ligaSeleccionada" (change)="onLigaChange()">
+      <option value="103" disabled>Elige tu liga</option>
+      <option value="103">Liga Americana</option>
+      <option value="104">Liga Nacional</option>
+    </select>
+  </div>
+</div>
+
+<div *ngIf="error">{{ error }}</div>
+
+<div *ngFor="let division of standingsFiltrados">
+  <h2>{{ division.division.name }}</h2>
+  <div class="tabla-container">
+    <table class="tabla-posiciones">
+      <thead>
+        <tr>
+          <th>Equipo</th>
+          <th>W</th>
+          <th>L</th>
+          <th>%</th>
+          <th>GB</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let team of division.teamRecords">
+          <td class="equipo">
+            <span class="nombre-equipo">{{ team.team.name }}</span>
+          </td>
+          <td>{{ team.wins }}</td>
+          <td>{{ team.losses }}</td>
+          <td>{{ team.winningPercentage }}</td>
+          <td>{{ team.gamesBack }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- <link rel="stylesheet" href="tabla-posiciones.css">
+
+<header class="barra-superior">
+  <div class="contenido-barra">
+    <div class="logo"></div>
+    <nav class="menu">
+      <a routerLink="/inicio">Inicio</a>
+      <a routerLink="/resultados">Resultados</a>
+      <a routerLink="/estadistica">Estadisticas</a>
+      <a routerLink="/posiciones">Equipos</a>
+      <a routerLink="/equipos">El Rey de los deportes</a>
+    </nav>
+    <div class="perfil">
+      <span class="nombre-usuario">Mi Perfil ▾</span>
+    </div>
+  </div>
+</header>
+
+<div class="filtros">
+  <select [(ngModel)]="ligaSeleccionada" (change)="onLigaChange()">
+    <option value="103">Liga Americana</option>
+    <option value="104">Liga Nacional</option>
+  </select>
+</div>
+
+<div *ngIf="error">{{ error }}</div>
+
+<div *ngFor="let division of standingsFiltrados">
+
+  <h2>{{ division.division.name }}</h2>
+
+  <div class="tabla-container">
+    <table class="tabla-posiciones">
+      <thead>
+        <tr>
+          <th>Equipo</th>
+          <th>W</th>
+          <th>L</th>
+          <th>%</th>
+          <th>GB</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let team of division.teamRecords">
+          <td class="equipo">
+            <span class="nombre-equipo">{{ team.team.name }}</span>
+          </td>
+          <td>{{ team.wins }}</td>
+          <td>{{ team.losses }}</td>
+          <td>{{ team.winningPercentage }}</td>
+          <td>{{ team.gamesBack }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div> -->
+
+<!-- <link rel="stylesheet" href="tabla-posiciones.css">
+
+<header class="barra-superior">
+  <div class="contenido-barra">
+    <div class="logo"></div>
+    <nav class="menu">
+      <a routerLink="/inicio">Inicio</a>
+      <a routerLink="/resultados">Resultados</a>
+      <a routerLink="/estadistica">Estadisticas</a>
+      <a routerLink="/posiciones">Equipos</a>
+      <a routerLink="/equipos">El Rey de los deportes</a>
+    </nav>
+    <div class="perfil">
+      <span class="nombre-usuario">Mi Perfil ▾</span>
+    </div>
+  </div>
+</header>
+
+<div class="filtros">
+  <select [(ngModel)]="ligaSeleccionada" (change)="onLigaChange()">
+    <option value="103">Liga Americana</option>
+    <option value="104">Liga Nacional</option>
+  </select>
+</div>
+
+<div *ngIf="cargando" class="loading">
+  <div class="spinner"></div>
+  <p>Cargando posiciones...</p>
+</div>
+
+<div *ngIf="error">{{ error }}</div>
+
+<div *ngIf="!cargando && standingsFiltrados.length > 0">
+
+  <div *ngFor="let division of standingsFiltrados">
+
+    <h2>{{ division.division.name }}</h2>
+
+    <div class="tabla-container">
+      <table class="tabla-posiciones">
+        <thead>
+          <tr>
+            <th>Equipo</th>
+            <th>W</th>
+            <th>L</th>
+            <th>%</th>
+            <th>GB</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let team of division.teamRecords">
+            <td class="equipo">
+              <span class="nombre-equipo">{{ team.team.name }}</span>
+            </td>
+            <td>{{ team.wins }}</td>
+            <td>{{ team.losses }}</td>
+            <td>{{ team.winningPercentage }}</td>
+            <td>{{ team.gamesBack }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div> -->

@@ -1,5 +1,66 @@
 <div class="pagina-login">
 
+  <form class="login" @formAnim [@errorAnim]="loginState">
+
+    <div class="logo-wrapper" @logoAnim [@logoBreathing]="logoState">
+      <div class="logo-mlb"></div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['email']">
+        <span class="icon pelota"></span>
+        <input
+          type="email"
+          placeholder="Correo electrónico"
+          [(ngModel)]="email" name="email"
+          (ngModelChange)="limpiarError('email')"
+          (focus)="setFocus('email')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'email' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['email']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['email'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['contrasenna']">
+        <span class="icon bate"></span>
+        <input
+          type="password"
+          placeholder="Contraseña"
+          [(ngModel)]="contrasenna" name="contrasenna"
+          (ngModelChange)="limpiarError('contrasenna')"
+          (focus)="setFocus('password')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'password' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['contrasenna']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['contrasenna'] }}</span>
+      </div>
+    </div>
+
+    <p class="recuperar-contrasena">
+      <a routerLink="/recuperar-contrasena">Olvide Contraseña</a>
+    </p>
+
+    <button type="button" class="entrar" (click)="login()" @buttonAnim>
+      Entrar
+    </button>
+
+    <p class="registro">
+      ¿No tienes cuenta?
+      <a routerLink="/registro">Registrate aqui</a>
+    </p>
+
+  </form>
+
+</div>
+
+<!-- <div class="pagina-login">
+
   <form class="login"
         @formAnim
         [@errorAnim]="loginState">
@@ -52,4 +113,4 @@
 
   </form>
 
-</div>
+</div> -->

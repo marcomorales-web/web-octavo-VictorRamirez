@@ -7,6 +7,7 @@ import { Resultados } from './resultados/resultados';
 import { Estadisticas } from './estadisticas/estadisticas';
 import { Equipos } from './equipos/equipos';
 import { ReyDeportesComponent } from './rey-deportes/rey-deportes';
+import { TablaPosiciones } from './tabla-posiciones/tabla-posiciones';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,5 +18,6 @@ export const routes: Routes = [
   { path: 'resultados', component: Resultados},
   { path: 'estadistica', component: Estadisticas },
   { path: 'equipos', component: Equipos },
-  { path: 'reyDeportes', component: ReyDeportesComponent }
+  { path: 'reyDeportes', component: ReyDeportesComponent },
+  { path: 'tablaPosiciones', component: TablaPosiciones }
 ];

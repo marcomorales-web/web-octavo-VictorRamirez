@@ -1,4 +1,435 @@
 <div class="pagina-registro">
+  <form class="login" @formAnim [@errorAnim]="registerState">
+
+    <div class="logo-wrapper" @logoAnim [@logoBreathing]="logoState">
+      <div class="logo-mlb"></div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['nombre']">
+        <span class="icon pelota"></span>
+        <input type="text" placeholder="Nombre"
+          [(ngModel)]="nombre" name="nombre"
+          (ngModelChange)="limpiarError('nombre')"
+          (focus)="setFocus('nombre')"
+          (blur)="validarCampo('nombre'); clearFocus()"
+          [@inputAnim]="inputFocus === 'nombre' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['nombre']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['nombre'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['apellidos']">
+        <span class="icon bate"></span>
+        <input type="text" placeholder="Apellidos"
+          [(ngModel)]="apellidos" name="apellidos"
+          (ngModelChange)="limpiarError('apellidos')"
+          (focus)="setFocus('apellidos')"
+          (blur)="validarCampo('apellidos'); clearFocus()"
+          [@inputAnim]="inputFocus === 'apellidos' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['apellidos']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['apellidos'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['email']">
+        <span class="icon pelota"></span>
+        <input type="email" placeholder="Correo electrónico"
+          [(ngModel)]="email" name="email"
+          (ngModelChange)="limpiarError('email')"
+          (focus)="setFocus('email')"
+          (blur)="validarCampo('email'); clearFocus()"
+          [@inputAnim]="inputFocus === 'email' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['email']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['email'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['contrasenna']">
+        <span class="icon bate"></span>
+        <input type="password" placeholder="Contraseña"
+          [(ngModel)]="contrasenna" name="contrasenna"
+          (ngModelChange)="limpiarError('contrasenna')"
+          (focus)="setFocus('password')"
+          (blur)="validarCampo('contrasenna'); clearFocus()"
+          [@inputAnim]="inputFocus === 'contrasenna' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['contrasenna']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['contrasenna'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['confirmarContrasenna']">
+        <span class="icon pelota"></span>
+        <input type="password" placeholder="Confirmar contraseña"
+          [(ngModel)]="confirmarContrasenna" name="confirmarContrasenna"
+          (ngModelChange)="limpiarError('confirmarContrasenna')"
+          (focus)="setFocus('confirmPassword')"
+          (blur)="validarCampo('confirmarContrasenna'); clearFocus()"
+          [@inputAnim]="inputFocus === 'confirmarContrasenna' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['confirmarContrasenna']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['confirmarContrasenna'] }}</span>
+      </div>
+    </div>
+
+    <button type="button" class="entrar" (click)="register()" @buttonAnim>
+      Registrarse
+    </button>
+
+    <div class="toast-exito" *ngIf="mensajeExito" @toastAnim>
+      <div class="exito-icono">✔</div>
+      <div class="exito-contenido">
+        <span class="exito-titulo">¡Registro exitoso!</span>
+        <span class="exito-sub">Redirigiendo al inicio de sesión...</span>
+      </div>
+    </div>
+
+    <p class="registro">
+      ¿Ya tienes cuenta?
+      <a routerLink="/login">Inicia sesión</a>
+    </p>
+
+  </form>
+</div>
+
+
+
+
+<!-- <div class="pagina-registro">
+  <form class="login" @formAnim [@errorAnim]="registerState">
+
+    <div class="logo-wrapper" @logoAnim [@logoBreathing]="logoState">
+      <div class="logo-mlb"></div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['nombre']">
+        <span class="icon pelota"></span>
+        <input type="text" placeholder="Nombre"
+          [(ngModel)]="nombre" name="nombre"
+          (ngModelChange)="validarCampo('nombre')"
+          (focus)="setFocus('nombre')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'nombre' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['nombre']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['nombre'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['apellidos']">
+        <span class="icon bate"></span>
+        <input type="text" placeholder="Apellidos"
+          [(ngModel)]="apellidos" name="apellidos"
+          (ngModelChange)="validarCampo('apellidos')"
+          (focus)="setFocus('apellidos')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'apellidos' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['apellidos']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['apellidos'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['email']">
+        <span class="icon pelota"></span>
+        <input type="email" placeholder="Correo electrónico"
+          [(ngModel)]="email" name="email"
+          (ngModelChange)="validarCampo('email')"
+          (focus)="setFocus('email')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'email' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['email']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['email'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['contrasenna']">
+        <span class="icon bate"></span>
+        <input type="password" placeholder="Contraseña"
+          [(ngModel)]="contrasenna" name="contrasenna"
+          (ngModelChange)="validarCampo('contrasenna')"
+          (focus)="setFocus('password')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'contrasenna' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['contrasenna']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['contrasenna'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['confirmarContrasenna']">
+        <span class="icon pelota"></span>
+        <input type="password" placeholder="Confirmar contraseña"
+          [(ngModel)]="confirmarContrasenna" name="confirmarContrasenna"
+          (ngModelChange)="validarCampo('confirmarContrasenna')"
+          (focus)="setFocus('confirmPassword')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'confirmarContrasenna' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['confirmarContrasenna']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['confirmarContrasenna'] }}</span>
+      </div>
+    </div>
+
+    <button type="button" class="entrar" (click)="register()" @buttonAnim>
+      Registrarse
+    </button>
+
+    <div class="toast-exito" *ngIf="mensajeExito" @toastAnim>
+  <div class="exito-icono">✔</div>
+  <div class="exito-contenido">
+    <span class="exito-titulo">¡Registro exitoso!</span>
+    <span class="exito-sub">Redirigiendo al inicio de sesión...</span>
+  </div>
+</div>
+
+    <p class="registro">
+      ¿Ya tienes cuenta?
+      <a routerLink="/login">Inicia sesión</a>
+    </p>
+
+  </form>
+</div> -->
+
+
+
+
+
+
+
+
+<!-- <div class="pagina-registro">
+  <form class="login" @formAnim [@errorAnim]="registerState">
+
+    <div class="logo-wrapper" @logoAnim [@logoBreathing]="logoState">
+      <div class="logo-mlb"></div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['nombre']">
+        <span class="icon pelota"></span>
+        <input type="text" placeholder="Nombre"
+          [(ngModel)]="nombre" name="nombre"
+          (ngModelChange)="validarCampo('nombre')"
+          (focus)="setFocus('nombre')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'nombre' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['nombre']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['nombre'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['apellidos']">
+        <span class="icon bate"></span>
+        <input type="text" placeholder="Apellidos"
+          [(ngModel)]="apellidos" name="apellidos"
+          (ngModelChange)="validarCampo('apellidos')"
+          (focus)="setFocus('apellidos')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'apellidos' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['apellidos']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['apellidos'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['email']">
+        <span class="icon pelota"></span>
+        <input type="email" placeholder="Correo electrónico"
+          [(ngModel)]="email" name="email"
+          (ngModelChange)="validarCampo('email')"
+          (focus)="setFocus('email')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'email' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['email']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['email'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['contrasenna']">
+        <span class="icon bate"></span>
+        <input type="password" placeholder="Contraseña"
+          [(ngModel)]="contrasenna" name="contrasenna"
+          (ngModelChange)="validarCampo('contrasenna')"
+          (focus)="setFocus('password')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'contrasenna' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['contrasenna']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['contrasenna'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['confirmarContrasenna']">
+        <span class="icon pelota"></span>
+        <input type="password" placeholder="Confirmar contraseña"
+          [(ngModel)]="confirmarContrasenna" name="confirmarContrasenna"
+          (ngModelChange)="validarCampo('confirmarContrasenna')"
+          (focus)="setFocus('confirmPassword')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'confirmarContrasenna' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['confirmarContrasenna']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['confirmarContrasenna'] }}</span>
+      </div>
+    </div>
+
+    <button type="button" class="entrar" (click)="register()" @buttonAnim>
+      Registrarse
+    </button>
+
+    <p class="registro">
+      ¿Ya tienes cuenta?
+      <a routerLink="/login">Inicia sesión</a>
+    </p>
+
+  </form>
+</div>
+
+
+<!-- <div class="pagina-registro">
+  <form class="login" @formAnim [@errorAnim]="registerState">
+
+    <div class="logo-wrapper" @logoAnim [@logoBreathing]="logoState">
+      <div class="logo-mlb"></div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['nombre']">
+        <span class="icon pelota"></span>
+        <input type="text" placeholder="Nombre"
+          [(ngModel)]="nombre" name="nombre"
+          (ngModelChange)="validarCampo('nombre')"
+          (focus)="setFocus('nombre')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'nombre' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['nombre']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['nombre'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['apellidos']">
+        <span class="icon bate"></span>
+        <input type="text" placeholder="Apellidos"
+          [(ngModel)]="apellidos" name="apellidos"
+          (ngModelChange)="validarCampo('apellidos')"
+          (focus)="setFocus('apellidos')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'apellidos' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['apellidos']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['apellidos'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['email']">
+        <span class="icon pelota"></span>
+        <input type="email" placeholder="Correo electrónico"
+          [(ngModel)]="email" name="email"
+          (ngModelChange)="validarCampo('email')"
+          (focus)="setFocus('email')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'email' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['email']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['email'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['contrasenna']">
+        <span class="icon bate"></span>
+        <input type="password" placeholder="Contraseña"
+          [(ngModel)]="contrasenna" name="contrasenna"
+          (ngModelChange)="validarCampo('contrasenna')"
+          (focus)="setFocus('password')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'contrasenna' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['contrasenna']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['contrasenna'] }}</span>
+      </div>
+    </div>
+
+    <div class="campo-wrapper">
+      <div class="grupo-registro icon-input" [class.campo-error]="errores['confirmarContrasenna']">
+        <span class="icon pelota"></span>
+        <input type="password" placeholder="Confirmar contraseña"
+          [(ngModel)]="confirmarContrasenna" name="confirmarContrasenna"
+          (ngModelChange)="validarCampo('confirmarContrasenna')"
+          (focus)="setFocus('confirmPassword')"
+          (blur)="clearFocus()"
+          [@inputAnim]="inputFocus === 'confirmarContrasenna' ? 'active' : 'inactive'">
+      </div>
+      <div class="toast-error" *ngIf="errores['confirmarContrasenna']" @toastAnim>
+        <span class="toast-label">✕ STRIKE</span>
+        <span class="toast-msg">{{ errores['confirmarContrasenna'] }}</span>
+      </div>
+    </div>
+
+    <button type="button" class="entrar" (click)="register()" @buttonAnim>
+      Registrarse
+    </button>
+
+    <div class="toast-exito" *ngIf="mensajeExito" @toastAnim>
+  <div class="exito-icono">✔</div>
+  <div class="exito-contenido">
+    <span class="exito-titulo">¡Registro exitoso!</span>
+    <span class="exito-sub">Redirigiendo al inicio de sesión...</span>
+  </div>
+</div>
+
+    <p class="registro">
+      ¿Ya tienes cuenta?
+      <a routerLink="/login">Inicia sesión</a>
+    </p>
+
+  </form>
+</div> -->
+
+<!-- <div class="pagina-registro">
 
   <form class="login"
         @formAnim
@@ -58,6 +489,8 @@
       {{ mensajeError }}
     </p>
 
+    <p class="mensaje-exito" *ngIf="mensajeExito">{{ mensajeExito }}</p>
+
     <p class="registro">
       ¿Ya tienes cuenta?
       <a routerLink="/login">Inicia sesión</a>
@@ -65,4 +498,4 @@
 
   </form>
 
-</div>
+</div> -->

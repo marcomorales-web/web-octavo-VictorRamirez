@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .login {
@@ -150,3 +151,134 @@
   text-decoration: underline;
 }
 
+.mensaje-error {
+  color: red;
+}
+
+.mensaje-exito {
+  color: green;
+}
+
+
+
+
+
+/* Wrapper para posicionar la tarjeta al costado */
+.campo-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Borde rojo en el input cuando hay error */
+.campo-error input {
+  border-color: #e53e3e !important;
+  box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.2) !important;
+}
+
+/* Tarjeta flotante al costado derecho del campo */
+.toast-error {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 14px);
+  transform: translateY(-50%);
+  background: #fff5f5;
+  border: 1.5px solid #e53e3e;
+  border-left: 4px solid #e53e3e;
+  border-radius: 8px;
+  padding: 8px 12px;
+  min-width: 190px;
+  max-width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-shadow: 0 4px 14px rgba(229, 62, 62, 0.15);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Flechita apuntando hacia el input */
+.toast-error::before {
+  content: '';
+  position: absolute;
+  left: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px 8px 6px 0;
+  border-style: solid;
+  border-color: transparent #e53e3e transparent transparent;
+}
+
+.toast-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #e53e3e;
+  text-transform: uppercase;
+}
+
+.toast-msg {
+  font-size: 0.76rem;
+  color: #742a2a;
+  line-height: 1.35;
+}
+
+/* En pantallas angostas la tarjeta cae debajo del campo */
+@media (max-width: 750px) {
+  .toast-error {
+    position: static;
+    transform: none;
+    margin-top: 5px;
+    max-width: 100%;
+    min-width: unset;
+    margin-bottom: 4px;
+  }
+  .toast-error::before {
+    display: none;
+  }
+}
+
+.toast-exito {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f0fff4, #dcfce7);
+  border: 1.5px solid #38a169;
+  border-left: 5px solid #38a169;
+  box-shadow: 0 4px 16px rgba(56, 161, 105, 0.18);
+  width: 100%;
+}
+
+.exito-icono {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: #38a169;
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(56, 161, 105, 0.35);
+}
+
+.exito-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.exito-titulo {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #276749;
+}
+
+.exito-sub {
+  font-size: 0.75rem;
+  color: #38a169;
+}

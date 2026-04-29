@@ -149,3 +149,94 @@
   opacity: 1;
 }
 
+
+
+.pagina-login {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pagina-login::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("../../assets/img/EstadioDiablos2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.campo-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.campo-error input {
+  border-color: #e53e3e !important;
+  box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.2) !important;
+}
+
+.toast-error {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 14px);
+  transform: translateY(-50%);
+  background: #fff5f5;
+  border: 1.5px solid #e53e3e;
+  border-left: 4px solid #e53e3e;
+  border-radius: 8px;
+  padding: 8px 12px;
+  min-width: 190px;
+  max-width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-shadow: 0 4px 14px rgba(229, 62, 62, 0.15);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.toast-error::before {
+  content: '';
+  position: absolute;
+  left: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px 8px 6px 0;
+  border-style: solid;
+  border-color: transparent #e53e3e transparent transparent;
+}
+
+.toast-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #e53e3e;
+  text-transform: uppercase;
+}
+
+.toast-msg {
+  font-size: 0.76rem;
+  color: #742a2a;
+  line-height: 1.35;
+}
+
+@media (max-width: 750px) {
+  .toast-error {
+    position: static;
+    transform: none;
+    margin-top: 5px;
+    max-width: 100%;
+    min-width: unset;
+    margin-bottom: 4px;
+  }
+
+  .toast-error::before {
+    display: none;
+  }
+}

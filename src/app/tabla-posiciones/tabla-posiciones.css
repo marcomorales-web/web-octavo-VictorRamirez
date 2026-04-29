@@ -1,0 +1,328 @@
+.barra-superior {
+  width: 100%;
+  height: 90px;
+  background: linear-gradient(180deg, #0a2f6b, #041E42);
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.30);
+  border-bottom: 3px solid #c8102e; 
+}
+
+.contenido-barra {
+  width: 100%;
+  padding-left: 30px; 
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 160px;
+  height: 70px;
+
+  background-image: url("../../assets/img/mlbEspanol2.jpg");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+}
+
+.contenido-barra {
+  width: 100%;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  margin-left: 50px;
+  display: flex;
+  gap: 30px;
+}
+
+.menu a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.menu a:hover {
+  opacity: 0.75;
+  transform: translateY(-1px);
+}
+
+.perfil {
+  margin-left: auto; 
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.perfil:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* 🔹 CONTENEDOR GENERAL */
+body {
+  background: #f4f6f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 🔹 FILTROS */
+.filtros {
+  display: flex;
+  gap: 15px;
+  padding: 20px 30px;
+}
+
+.filtros select {
+  background: #ffffff;
+  border: 2px solid #041E42;
+  color: #041E42;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.filtros select:hover {
+  border-color: #c8102e;
+  color: #c8102e;
+}
+
+/* 🔹 TITULOS DE DIVISION */
+h2 {
+  margin: 25px 30px 10px;
+  color: #041E42;
+  border-left: 6px solid #c8102e;
+  padding-left: 10px;
+  font-size: 22px;
+}
+
+/* 🔹 TABLA */
+.tabla-posiciones {
+  width: 92%;
+  margin: 0 auto 30px;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* 🔹 HEADER TABLA */
+.tabla-posiciones thead {
+  background: #041E42;
+}
+
+.tabla-posiciones th {
+  padding: 14px;
+  text-align: center;
+  font-size: 13px;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+/* 🔹 FILAS */
+.tabla-posiciones td {
+  padding: 12px;
+  text-align: center;
+  border-top: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+/* 🔹 PRIMERA COLUMNA (EQUIPO) */
+.tabla-posiciones td:first-child {
+  text-align: left;
+  padding-left: 20px;
+  font-weight: 600;
+  color: #041E42;
+}
+
+/* 🔹 HOVER */
+.tabla-posiciones tbody tr:hover {
+  background: #f1f5f9;
+  transition: 0.2s;
+}
+
+/* 🔥 LÍDER DE DIVISIÓN */
+.tabla-posiciones tbody tr:first-child {
+  background: rgba(200, 16, 46, 0.08);
+  border-left: 5px solid #c8102e;
+}
+
+/* 🔹 LOADING */
+div[ng-reflect-ng-if="true"] {
+  text-align: center;
+  padding: 20px;
+  color: #041E42;
+  font-weight: 600;
+}
+
+
+@media (max-width: 1024px) {
+
+  .menu {
+    gap: 20px;
+  }
+
+  .menu a {
+    font-size: 16px;
+  }
+
+  .tabla-posiciones th,
+  .tabla-posiciones td {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  /* 🔹 HEADER MÁS COMPACTO */
+  .barra-superior {
+    height: auto;
+    padding: 10px;
+  }
+
+  .contenido-barra {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .logo {
+    width: 130px;
+    height: 60px;
+  }
+
+  /* 🔹 OCULTAR MENÚ (opcional) */
+  .menu {
+    display: none;
+  }
+
+  /* 🔹 PERFIL */
+  .perfil {
+    align-self: flex-end;
+    font-size: 14px;
+  }
+
+  /* 🔹 FILTROS */
+  .filtros {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .filtros select {
+    width: 100%;
+  }
+
+  /* 🔹 TITULOS */
+  h2 {
+    font-size: 18px;
+  }
+
+}
+
+/* 🔹 CONTENEDOR SCROLL PARA TABLA */
+.tabla-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* 🔹 TABLA MÁS ANCHA PARA SCROLL */
+.tabla-posiciones {
+  min-width: 600px;
+}
+
+/* 🔹 BARRA CENTRAL (logo + divisor + filtros) */
+.barra-central {
+  display: flex;
+  align-items: center;
+  justify-content: center;          /* centra el grupo completo */
+  background: #ffffff;
+  padding: 14px 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-bottom: 2px solid #e5e7eb;
+  gap: 0;
+}
+
+/* 🔹 LOGO CENTRAL */
+.logo-central {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-central {
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* 🔹 LÍNEA DIVISORA VERTICAL */
+.divisor-vertical {
+  width: 2px;
+  height: 52px;
+  background: #1a1a1a;
+  border-radius: 2px;
+  margin: 0 28px;
+  flex-shrink: 0;
+}
+
+/* 🔹 FILTROS (redefinidos dentro de barra-central) */
+.barra-central .filtros {
+  padding: 0;
+  gap: 0;
+  display: flex;
+  align-items: center;
+}
+
+.barra-central .filtros select {
+  background: #ffffff;
+  border: 2px solid #041E42;
+  color: #041E42;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s;
+  appearance: auto;
+}
+
+.barra-central .filtros select:hover {
+  border-color: #c8102e;
+  color: #c8102e;
+}
+
+/* 🔹 OPCIÓN EN BLANCO (placeholder visual) */
+.barra-central .filtros select option[value=""] {
+  display: none;
+}
+
+/* 🔹 RESPONSIVE BARRA CENTRAL */
+@media (max-width: 768px) {
+  .barra-central {
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 15px;
+  }
+
+  .divisor-vertical {
+    width: 60px;
+    height: 2px;
+    margin: 4px 0;
+  }
+
+  .barra-central .filtros select {
+    width: 100%;
+  }
+}
